@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kwetu Care Foundation | Healthcare with Heart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    /* PARTNERS MARQUEE ANIMATIONS */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes marquee2 {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(0%); }
+        }
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+        .animate-marquee2 {
+            animation: marquee2 40s linear infinite;
+        }
+        .marquee-group:hover .animate-marquee,
+        .marquee-group:hover .animate-marquee2 {
+            animation-play-state: paused;
+        }
+    .flip-card {
+    perspective: 1000px;
+    height: 320px; /* Reduced height to fit page */
+}
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+.flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1.5rem; /* Slightly smaller radius for smaller cards */
+}
+.flip-back {
+    transform: rotateY(180deg);
+}
+    /* Gallery Layout */
+        .kc-scroll-track {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem 0 3rem 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: #be123c #e2e8f0;
+        }
+
+        .kc-scroll-track::-webkit-scrollbar { height: 6px; }
+        .kc-scroll-track::-webkit-scrollbar-thumb { background: var(--kc-med-red); border-radius: 10px; }
+
+        .kc-feature-card {
+            flex: 0 0 350px;
+            height: 480px;
+            border-radius: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .kc-feature-card:hover { transform: translateY(-10px); }
+
+        .kc-overlay-grad {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+        }
+
+        /* Overlay Reader */
+        #kc-reader-overlay {
+            z-index: 999999 !important;
+            position: fixed;
+            inset: 0;
+            background: white;
+            display: none;
+            overflow-y: auto;
+        }
+        .kc-lock-scroll { overflow: hidden !important; }
+
+        .kc-view-link {
+            border-bottom: 2px solid var(--kc-med-red);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            font-weight: 800;
+        }
+        /* 1. Global Typography Updates */
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            scroll-behavior: smooth; 
+            color: #141414; /* Softer slate gray for body text */
+        }
+        /* General Paragraph Style */
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;       /* Approx 16px */
+    line-height: 1.7;      /* Relaxed spacing for easier reading */
+    font-weight: 400;      /* Regular weight (not bold) */
+    letter-spacing: 0.01em;
+}
+        /* General Headings Style (H1, H3, H4) */
+        h1, h3, h4, .font-serif { 
+            font-family: 'Poppins', serif; 
+            color: #ffffff; 
+            letter-spacing: -0.02em;
+            text-transform: capitalize;
+        }
+
+        /* Specific Style for H2 Only */
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            color: #000000; /* Pure Black as requested */
+            letter-spacing: -0.02em;
+            text-transform: capitalize;
+        }
+
+        /* 2. Responsive Stats Overlap Fix */
+        .stats-overlap { 
+            margin-top: -30px; /* Reduced for mobile */
+            position: relative; 
+            z-index: 40; 
+        }
+
+        @media (min-width: 768px) {
+            .stats-overlap { margin-top: -100px; } /* Deep overlap for desktop */
+        }
+
+        /* 3. Branding Colors */
+        .bg-medical-red { background-color: #D60C3D; }
+        .text-medical-red { color: #D60C3D; }
+        
+        /* Utility for smoother transitions */
+        .transition-all { transition: all 0.3s ease-in-out; }
+
+        .team-card:hover img { transform: scale(1.08); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .gift-prompt {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu { 
+            display: none; 
+            position: absolute;
+            z-index: 100;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @media (min-width: 1024px) {
+            .dropdown:hover .dropdown-menu { display: block; }
+        }
+
+        #mobile-nav.active { display: flex; }
+        #donate-modal { transition: all 0.3s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-active { border-color: #D60C3D !important; color: #D60C3D !important; background-color: #FEF2F2; }
+        
+        a, button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 550; /* Semi-bold to make them pop */
+            transition: all 0.3s ease; /* Makes color changes smooth */
+            text-transform: capitalize; /* Ensures First Letter Caps for titles */
+            text-decoration: none;
+        }
+
+        /* Hover state: What happens when you put your mouse over it */
+        a:hover {
+            color: #D60C3D; /* Changes to your Medical Red */
+        }
+
+        /* Specific styling for the Navigation Menu links */
+        nav, nav a, nav button {
+           font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            text-transform: capitalize; /* Ensures First Letter Caps for titles */
+        }
+
+        /* 3. Dropdown Button specific fix */
+        .dropdown button {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 550;
+            text-transform: capitalize;
+            color: #000000;
+        }
+
+        .dropdown button:hover {
+            color: #D60C3D;
+        }
+
+        @font-face {
+            font-family: 'Delight';
+            src: url('fonts/Delight-Bold.woff2') format('woff2');
+            font-weight: 900;
+        }
+
+        .font-delight {
+            font-family: 'Poppins', sans-serif; /* Fallback to Poppins if Delight is missing */
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+        }
+
+        /* Active state for the text slider transition */
+        .text-slide-active {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            z-index: 30;
+        }
+        
+        .text-slide {
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+<div id="donate-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/60 backdrop-blur-md p-4 transition-all duration-300">
+    
+    <div class="bg-white w-full max-w-md rounded-[32px] overflow-hidden shadow-2xl relative ring-1 ring-black/5 transform transition-all">
+        
+        <button onclick="toggleDonate()" class="absolute top-5 right-5 text-white/80 hover:text-white transition-colors z-20 bg-black/10 hover:bg-black/20 rounded-full p-1 backdrop-blur-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <div id="modal-header" class="bg-gradient-to-br from-emerald-600 to-emerald-800 p-10 text-white text-center relative overflow-hidden transition-all duration-700 ease-in-out">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" 
+                 style="background-image: radial-gradient(circle at 50% -20%, white 0%, transparent 70%);"></div>
+            
+            <h3 id="header-title" class="text-3xl font-serif font-medium tracking-tight relative z-10 transition-colors duration-500">Support Our Mission</h3>
+            <div id="header-line" class="h-1 w-12 bg-white/40 mx-auto my-3 rounded-full transition-all duration-500"></div>
+            <p class="opacity-90 text-sm font-light tracking-wide relative z-10">Empowering health in Laikipia County</p>
+        </div>
+
+        <div class="p-8">
+            
+            <div class="flex bg-gray-100 p-1 rounded-xl mb-8 relative">
+                <button onclick="switchMethod('mpesa')" id="tab-mpesa" class="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-sm bg-white text-emerald-600">
+                    M-Pesa
+                </button>
+                <button onclick="switchMethod('bank')" id="tab-bank" class="flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all duration-300 text-gray-400 hover:text-gray-600">
+                    Bank Transfer
+                </button>
+            </div>
+
+            <div id="method-mpesa" class="space-y-4 animate-fade-in">
+                <div class="group border border-emerald-100 bg-emerald-50/30 p-4 rounded-2xl flex items-center justify-between hover:border-emerald-300 transition-colors">
+                    <div>
+                        <p class="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mb-0.5">M-Pesa</p>
+                        <p id="paybill-val" class="text-xl font-mono font-medium text-gray-800 tracking-tight">0727 00 46 17</p>
+                    </div>
+                    <button onclick="copyToClipboard('paybill-val', this, 'mpesa')" class="bg-white border border-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all active:scale-95">
+                        Copy
+                    </button>
+                </div>
+                
+                <div class="group border border-emerald-100 bg-emerald-50/30 p-4 rounded-2xl flex items-center justify-between hover:border-emerald-300 transition-colors">
+                    <div>
+                        <p class="text-[10px] text-emerald-600 font-bold uppercase tracking-widest mb-0.5">Or</p>
+                        <p id="mpesa-acc-val" class="text-xl font-mono font-medium text-gray-800 tracking-tight">0710 85 03 80</p>
+                    </div>
+                    <button onclick="copyToClipboard('mpesa-acc-val', this, 'mpesa')" class="bg-white border border-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-lg text-xs font-bold transition-all active:scale-95">
+                        Copy
+                    </button>
+                </div>
+            </div>
+
+            <div id="method-bank" class="hidden space-y-4 animate-fade-in">
+                <div class="p-5 bg-[#A32A29]/5 border border-[#A32A29]/10 rounded-2xl text-center mb-2">
+                    <p class="text-[10px] text-[#A32A29] font-bold uppercase tracking-widest mb-1">Bank Name</p>
+                    <p class="text-lg font-serif font-bold text-gray-800">Equity Bank Kenya</p>
+                </div>
+
+                <div class="group border border-gray-100 bg-white p-4 rounded-2xl flex items-center justify-between hover:border-[#A32A29]/30 transition-colors shadow-sm">
+                    <div class="overflow-hidden">
+                        <p class="text-[10px] text-[#A32A29] font-bold uppercase tracking-widest mb-0.5">PAYBILL</p>
+                        <p id="bank-name-val" class="text-sm font-bold text-gray-800 truncate pr-2">247 247</p>
+                    </div>
+                    <button onclick="copyToClipboard('bank-name-val', this, 'bank')" class="shrink-0 bg-[#A32A29]/5 text-[#A32A29] hover:bg-[#A32A29] hover:text-white px-3 py-2 rounded-lg text-xs font-bold transition-all active:scale-95">
+                        Copy
+                    </button>
+                </div>
+
+                <div class="group border border-gray-100 bg-white p-4 rounded-2xl flex items-center justify-between hover:border-[#A32A29]/30 transition-colors shadow-sm">
+                    <div>
+                        <p class="text-[10px] text-[#A32A29] font-bold uppercase tracking-widest mb-0.5">Account Number</p>
+                        <p id="bank-acc-val" class="text-lg font-mono font-medium text-gray-800 tracking-tight">0270186209165</p>
+                    </div>
+                    <button onclick="copyToClipboard('bank-acc-val', this, 'bank')" class="bg-[#A32A29]/5 text-[#A32A29] hover:bg-[#A32A29] hover:text-white px-3 py-2 rounded-lg text-xs font-bold transition-all active:scale-95">
+                        Copy
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="toggleDonate()" class="mt-8 w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest shadow-lg hover:bg-black transition-all transform active:scale-[0.98]">
+                I Have Sent My Donation
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+<script>
+    function toggleDonate() {
+        const modal = document.getElementById('donate-modal');
+        modal.classList.toggle('hidden');
+        modal.classList.toggle('flex');
+    }
+
+    function switchMethod(method) {
+        const mpesaTab = document.getElementById('tab-mpesa');
+        const bankTab = document.getElementById('tab-bank');
+        const mpesaContent = document.getElementById('method-mpesa');
+        const bankContent = document.getElementById('method-bank');
+        
+        const header = document.getElementById('modal-header');
+        const headerLine = document.getElementById('header-line');
+
+        if (method === 'mpesa') {
+            // Header Styles
+            header.classList.replace('from-[#A32A29]', 'from-emerald-600');
+            header.classList.replace('to-[#781e1e]', 'to-emerald-800');
+            headerLine.classList.replace('bg-white/20', 'bg-white/40');
+
+            // Tab Styles
+            mpesaTab.className = "flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-sm bg-white text-emerald-600";
+            bankTab.className = "flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all text-gray-400 hover:text-gray-600 bg-transparent";
+            
+            mpesaContent.classList.remove('hidden');
+            bankContent.classList.add('hidden');
+        } else {
+            // Header Styles
+            header.classList.replace('from-emerald-600', 'from-[#A32A29]');
+            header.classList.replace('to-emerald-800', 'to-[#781e1e]');
+            headerLine.classList.replace('bg-white/40', 'bg-white/20');
+
+            // Tab Styles
+            bankTab.className = "flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-sm bg-white text-[#A32A29]";
+            mpesaTab.className = "flex-1 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all text-gray-400 hover:text-gray-600 bg-transparent";
+            
+            bankContent.classList.remove('hidden');
+            mpesaContent.classList.add('hidden');
+        }
+    }
+
+    function copyToClipboard(elementId, btnElement, type) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = btnElement.innerText;
+            btnElement.innerText = "Copied!";
+            
+            // Dynamic feedback color
+            const successClass = type === 'mpesa' ? 'bg-emerald-600' : 'bg-[#A32A29]';
+            btnElement.classList.add(successClass, 'text-white');
+            
+            setTimeout(() => {
+                btnElement.innerText = originalText;
+                btnElement.classList.remove(successClass, 'text-white');
+            }, 1500);
+        });
+    }
+</script>
+    <div class="bg-[#222221] text-gray-300 py-4 px-6 md:px-16 text-[10px] md:text-xs text-medium flex justify-between items-center border-b border-white/5">
+    <div class="flex gap-4 md:gap-6">
+        <a href="mailto:info@kwetucare.org" class="flex items-center gap-1.5 hover:text-white transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            kwetucarefoundation@hotmail.com
+        </a>
+        <span class="hidden sm:flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /></svg>
+            Laikipia, Kenya and Neighbouring communities.
+        </span>
+    </div>
+    <div class="flex gap-4 font-bold uppercase tracking-widest">
+        <a href="#contact" class="hover:text-white transition">VOLUNTEER</a>
+        <span class="text-gray-700">|</span>
+        <div class="flex items-center gap-3">
+            <a href="tel:+254758760619" class="hover:text-white transition-colors duration-300 flex items-center gap-2">
+                <span>+254 75876 0619</span>
+            </a>
+        </div>
+    </div>
+</div>
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm px-6 md:px-16 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+           <div class="flex flex-col justify-center inline-block">
+    <span class="text-2xl md:text-3xl font-black tracking-wider text-[#000000] leading-none">
+        KWETU CARE
+    </span>
+
+    <div class="flex items-center justify-between w-full mt-2 gap-2">
+        <div class="h-[2px] flex-grow bg-[#ED1C24]"></div>
+        <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] text-[#ED1C24] uppercase leading-none">
+            Foundation
+        </span>
+        <div class="h-[2px] flex-grow bg-[#ED1C24]"></div>
+    </div>
+</div>  </div>
+
+        <div class="hidden lg:flex items-center space-x-8 font-bold uppercase text-[11px] tracking-[0.15em]">
+            <a href="#home" class="hover:text-medical-red transition">Home</a>
+            <div class="relative dropdown group">
+                <button class="hover:text-medical-red transition flex items-center gap-1 uppercase py-2">
+                    About Us 
+                    <svg class="w-3 h-3 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="dropdown-menu left-0 mt-0 w-52 bg-white shadow-2xl rounded-2xl py-3 border border-gray-100">
+                    <a href="#about" class="block px-6 py-2.5 hover:bg-gray-50 hover:text-medical-red transition normal-case font-semibold">Who We Are</a>
+                  <a href="#team" class="block px-6 py-2.5 hover:bg-gray-50 hover:text-medical-red transition normal-case font-semibold">Our Team</a>
+                    <a href="#exist" class="block px-6 py-2.5 hover:bg-gray-50 hover:text-medical-red transition normal-case font-semibold">Why We Exist</a>
+                    <hr class="my-2 border-gray-50">
+                           </div>
+            </div>
+            <a href="#programs" class="hover:text-medical-red transition">Programs</a>
+            <a href="#contact" class="hover:text-medical-red transition">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button onclick="toggleDonate()" class="hidden sm:block bg-medical-red text-white px-7 py-2.5 font-extrabold text-sm shadow-lg hover:bg-red-700 transition transform hover:-translate-y-0.5 active:translate-y-0">DONATE</button>
+            <button id="menu-btn" class="lg:hidden text-gray-800 p-2"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+        </div>
+    </nav>
+
+ <div id="mobile-nav" class="fixed inset-0 z-[60] hidden flex-col justify-between bg-black text-white px-8 py-10 overflow-y-auto">
+    
+    <div class="flex items-center justify-between">
+        <span class="text-xs font-black uppercase tracking-[0.2em] text-rose-600">Kwetu Care</span>
+        <button id="close-btn" class="text-3xl font-light leading-none hover:text-rose-500 transition-all">✕</button>
+    </div>
+
+    <nav class="flex flex-col gap-7 mt-16 text-3xl font-serif">
+        
+        <a href="#home" class="mob-link block text-lg font-medium hover:text-rose-600 transition">
+            Home
+        </a>
+
+       <div class="w-full">
+    <button id="mob-about-toggle" class="flex items-center justify-between w-full text-lg font-medium hover:text-rose-600 transition group">
+        <span>About Us</span>
+        <span id="mob-about-icon" class="text-2xl font-light transition-transform">+</span>
+    </button>
+
+    <div id="mob-about-menu" class="hidden flex-col gap-5 pl-5 mt-5 border-l-2 border-white/10">
+        <a href="#about" class="mob-link block text-base text-white/50 hover:text-white transition">Who We Are</a>
+        <a href="#team" class="mob-link block text-base text-white/50 hover:text-white transition">Meet Our Team</a>
+          <a href="#exist" class="mob-link block text-base text-white/50 hover:text-white transition">Why We Exist</a>
+           </div>
+</div>
+
+        <a href="#programs" class="mob-link text-lg font-medium hover:text-rose-600 transition">Programs</a>
+        <a href="#Stories" class="mob-link text-lg font-medium hover:text-rose-600 transition">Stories</a>
+    </nav>
+
+    <div class="mt-12">
+        <button onclick="toggleDonate()" class="w-full border border-white py-4 text-lg font-black uppercase tracking-widest hover:bg-white hover:text-black transition">
+            Donate Today
+        </button>
+    </div>
+</div>
+
+<script>
+  // Targeted script for this specific segment
+    const aboutBtn = document.getElementById('mob-about-toggle');
+    const aboutMenu = document.getElementById('mob-about-menu');
+    const aboutIcon = document.getElementById('mob-about-icon');
+
+    aboutBtn.addEventListener('click', (e) => {
+        // Prevent event from closing the main menu if they overlap
+        e.stopPropagation(); 
+        
+        const isHidden = aboutMenu.classList.contains('hidden');
+
+        if (isHidden) {
+            aboutMenu.classList.remove('hidden');
+            aboutMenu.classList.add('flex');
+            aboutIcon.textContent = '−'; // Using a proper minus sign
+        } else {
+            aboutMenu.classList.add('hidden');
+            aboutMenu.classList.remove('flex');
+            aboutIcon.textContent = '+';
+        }
+    });
+    /**
+     * Mobile Navigation Logic
+     * Handles: Open, Close, Dropdown Toggling, and Auto-closing on click
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileNav = document.getElementById('mobile-nav');
+        const burgerBtn = document.getElementById('burger-menu'); // Trigger button in your header
+        const closeBtn = document.getElementById('close-btn');
+        const aboutToggle = document.getElementById('mob-about-toggle');
+        const aboutMenu = document.getElementById('mob-about-menu');
+        const aboutIcon = document.getElementById('mob-about-icon');
+        const navLinks = document.querySelectorAll('.mob-link');
+
+        // 1. OPEN MENU
+        if (burgerBtn) {
+            burgerBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileNav.classList.remove('hidden');
+                mobileNav.classList.add('flex');
+                document.body.style.overflow = 'hidden'; // Lock scrolling
+            });
+        }
+
+        // 2. CLOSE MENU FUNCTION
+        const closeMenu = () => {
+            mobileNav.classList.add('hidden');
+            mobileNav.classList.remove('flex');
+            document.body.style.overflow = 'auto'; // Unlock scrolling
+        };
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeMenu);
+        }
+
+        // 3. ABOUT US DROPDOWN FUNCTIONALITY
+        if (aboutToggle) {
+            aboutToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = aboutMenu.classList.contains('hidden');
+                
+                if (isHidden) {
+                    aboutMenu.classList.remove('hidden');
+                    aboutMenu.classList.add('flex');
+                    aboutIcon.textContent = '-';
+                    aboutToggle.classList.add('text-rose-600');
+                } else {
+                    aboutMenu.classList.add('hidden');
+                    aboutMenu.classList.remove('flex');
+                    aboutIcon.textContent = '+';
+                    aboutToggle.classList.remove('text-rose-600');
+                }
+            });
+        }
+
+        // 4. AUTO-CLOSE ON LINK CLICK
+        // Closes menu when user clicks a section link to show the scroll transition
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Short delay to allow browser to start the scroll before hiding overlay
+                setTimeout(closeMenu, 100);
+            });
+        });
+    });
+
+    /**
+     * Global Toggle Donate Modal
+     * This function is outside the DOMContentLoaded because it's called via 'onclick'
+     */
+    function toggleDonate() {
+        const modal = document.getElementById('donate-modal');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.style.zIndex = '1000000';
+            
+            // Close mobile menu if it's open
+            if (mobileNav) {
+                mobileNav.classList.add('hidden');
+                document.body.style.overflow = 'hidden'; // Keep body locked for modal
+            }
+        }
+    }
+</script>
+<section id="home" class="relative h-[90vh] md:h-[95vh] min-h-[90px] flex flex-col justify-center overflow-hidden bg-black px-6 md:px-16">
+    
+    <div id="hero-slider" class="absolute inset-0 z-0">
+        <div class="hero-slide absolute inset-0 transition-all duration-[1500ms] opacity-100 scale-100">
+            <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=2070" class="w-full h-full object-cover" alt="Hero 1">
+        </div>
+        <div class="hero-slide absolute inset-0 transition-all duration-[1500ms] opacity-0 scale-110">
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=2070" class="w-full h-full object-cover" alt="Hero 2">
+        </div>
+        <div class="hero-slide absolute inset-0 transition-all duration-[1500ms] opacity-0 scale-110">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=2070" class="w-full h-full object-cover" alt="Hero 3">
+        </div>
+        
+        <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-transparent"></div>
+    </div>
+
+    <div class="container mx-auto relative z-20 flex flex-col justify-between h-full py-8 md:py-12">
+        
+        <div class="max-w-3xl mt-auto">
+            <div id="text-slider" class="relative min-h-[150px] md:min-h-[280px] mb-4">
+                
+                <div class="text-slide text-slide-active absolute inset-0 transition-all duration-700 opacity-0 translate-y-8 pointer-events-none">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-medical-red/10 border-2 border-medical-red text-medical-red text-[10px] font-bold uppercase tracking-widest mb-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-medical-red animate-pulse"></span> Kenya & Beyond
+                    </div>
+                    <h1 class="font-delight font-black text-4xl md:text-6xl lg:text-7xl text-white mb-2">Building Futures.</h1>
+                    <p class="text-base md:text-xl text-white/90 font-medium italic">One life at a time.</p>
+                </div>
+
+                <div class="text-slide absolute inset-0 transition-all duration-700 opacity-0 translate-y-8 pointer-events-none">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-medical-red/10 border-2 border-medical-red text-medical-red text-[10px] font-bold uppercase tracking-widest mb-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-medical-red animate-pulse"></span> Kenya & Beyond
+                    </div>
+                    <h1 class="font-delight font-black text-4xl md:text-6xl lg:text-7xl text-white mb-2">Healthcare at Heart.</h1>
+                    <p class="text-base md:text-xl text-white/90 font-medium italic">Bringing care to where it's needed most.</p>
+                </div>
+
+                <div class="text-slide absolute inset-0 transition-all duration-700 opacity-0 translate-y-8 pointer-events-none">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-Crimson Red/10 border-2 border-medical-red text-medical-red text-[10px] font-bold uppercase tracking-widest mb-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-Crimson Red animate-pulse"></span> Kenya & Beyond
+                    </div>
+                    <h1 class="font-delight font-black text-4xl md:text-6xl lg:text-7xl text-white mb-2">Dignity in Care.</h1>
+                    <p class="text-base md:text-xl text-white/90 font-medium italic">For every community.</p>
+                </div>
+            </div>
+
+           <div class="w-20 h-1.5 bg-[#ED1C24] -mt-6 md:-mt-24 mb-4 relative z-20"></div>
+            <p class="text-white text-sm md:text-base leading-relaxed max-w-xl font-light opacity-95 mb-6 relative z-20">
+                At Kwetu Care Foundation, we believe healthcare is not a privilege, it’s a basic human right. We bring medical care, health education, and long-term support to communities often overlooked.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                <button onclick="toggleDonate()" class="w-full sm:w-auto bg-[#ED1C24] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase hover:bg-red-700 transition">
+                    Get Started
+                </button>
+                <a href="#about" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs text-white border-2 border-white text-center hover:bg-white transition">
+                    Learn More
+                </a>
+            </div>
+        </div>
+
+        <div id="hero-dots" class="absolute z-20 flex transition-all duration-300 bottom-6 left-1/2 -translate-x-1/2 flex-row gap-3 md:right-10 md:left-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col md:gap-4">
+            
+            <div class="nav-dot group cursor-pointer flex items-center justify-center" onclick="goToSlide(0)">
+                <div class="rounded-full transition-all duration-500 md:w-4 md:h-4 md:border-2 md:border-white md:bg-transparent md:flex md:items-center md:justify-center">
+                    <div class="hidden md:block w-1.5 h-1.5 bg-white rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="nav-dot group cursor-pointer flex items-center justify-center" onclick="goToSlide(1)">
+                <div class="h-1.5 w-4 bg-white/30 rounded-full transition-all duration-500 md:w-2 md:h-2 md:bg-white md:opacity-40"></div>
+            </div>
+
+            <div class="nav-dot group cursor-pointer flex items-center justify-center" onclick="goToSlide(2)">
+                <div class="h-1.5 w-4 bg-white/30 rounded-full transition-all duration-500 md:w-2 md:h-2 md:bg-white md:opacity-40"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const textSlides = document.querySelectorAll('.text-slide');
+    const dots = document.querySelectorAll('.nav-dot div'); // Selects the inner dot element
+
+    function goToSlide(n) {
+        // Remove active states from current slide
+        slides[currentSlide].classList.replace('opacity-100', 'opacity-0');
+        slides[currentSlide].classList.add('scale-110');
+        
+        textSlides[currentSlide].classList.remove('text-slide-active', 'opacity-100', 'translate-y-0');
+        textSlides[currentSlide].classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+
+        // Update index
+        currentSlide = (n + slides.length) % slides.length;
+
+        // Add active states to new slide
+        slides[currentSlide].classList.replace('opacity-0', 'opacity-100');
+        slides[currentSlide].classList.remove('scale-110');
+        
+        textSlides[currentSlide].classList.add('text-slide-active', 'opacity-100', 'translate-y-0');
+        textSlides[currentSlide].classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+
+        updateDots();
+    }
+
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('bg-white', 'w-4'); // Active style
+                dot.classList.remove('bg-white/30', 'w-2');
+            } else {
+                dot.classList.remove('bg-white', 'w-4');
+                dot.classList.add('bg-white/30', 'w-2');
+            }
+        });
+    }
+
+    // Auto-play
+    setInterval(() => {
+        goToSlide(currentSlide + 1);
+    }, 5000);
+
+    // Initial trigger to set first slide state
+    document.addEventListener('DOMContentLoaded', () => goToSlide(0));
+</script>
+<div class="container mx-auto px-6 md:px-16 relative z-30 mt-16 mb-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 shadow-xl rounded-[30px] overflow-hidden text-white">
+        
+        <div class="bg-[#009CA6] p-8 md:p-12 transition-transform hover:scale-[1.02] duration-300">
+            <h3 class="text-2xl font-bold mb-4 italic font-serif">Mission Statement</h3>
+            <p class="text-sm leading-relaxed opacity-90">
+                Kwetu Care Foundation exists to bridge the healthcare gap in underserved communities by providing accessible care, medical education, and sustainable support systems.
+            </p>
+        </div>
+
+        <div class="bg-[#00B2BE] p-8 md:p-12 flex flex-col justify-between border-y md:border-y-0 md:border-x border-white/10 transition-transform hover:scale-[1.02] duration-300">
+            <div>
+                <h3 class="text-2xl font-bold mb-4 italic font-serif">Support Us</h3>
+                <p class="text-sm leading-relaxed mb-8 opacity-90">
+                    Your contribution directly funds mobile clinics and medical supplies for those in need.
+                </p>
+            </div>
+            <button onclick="toggleDonate()" class="bg-white text-[#00B2BE] w-full py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-slate-50 transition shadow-lg">
+                Donate Money
+            </button>
+        </div>
+
+        <div class="bg-[#00C8D6] p-8 md:p-12 flex flex-col justify-between transition-transform hover:scale-[1.02] duration-300">
+            <div>
+                <h3 class="text-2xl font-bold mb-4 italic font-serif">Volunteer</h3>
+                <p class="text-sm leading-relaxed mb-8 opacity-90">
+                    Join our team of dedicated medics and community advocates making a difference on the ground.
+                </p>
+            </div>
+            <a href="#contact" class="block text-center bg-white text-[#00C8D6] w-full py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-slate-50 transition shadow-lg">
+                Be a Volunteer
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+<div id="timed-gift-prompt" style="
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 2147483647; 
+    background: white; 
+    border-radius: 20px; 
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4); 
+    max-width: 320px; 
+    overflow: hidden; 
+    border: 1px solid rgba(0,0,0,0.05); 
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.95);
+    pointer-events: auto; 
+    isolation: isolate;
+">
+    <div style="padding: 15px; display: flex; align-items: center; gap: 12px; position: relative; flex: 1;">
+        <div style="position: absolute; top: 8px; left: 12px; display: flex; align-items: center; gap: 5px;">
+            <div style="width: 6px; height: 6px; background: #E31837; border-radius: 50%;" class="mission-dot-pulse"></div>
+            <span id="mission-text-feed" style="font-size: 8px; font-weight: 900; color: #E31837; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.5s;">Mission: 72% Goal</span>
+        </div>
+        <div style="background: #fff5f5; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0; font-size: 18px;">❤️</div>
+        <p style="margin: 0; font-size: 11px; line-height: 1.4; font-weight: 800; color: #1f2937; letter-spacing: -0.01em;">
+            Your gift of <span style="color: #E31837;">1,200 KES</span> changes a life in Laikipia.
+        </p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; border-left: 1px solid #f3f4f6; width: 80px; flex-shrink: 0;">
+        <button id="gift-give-btn" style="flex: 1; border: none; background: #111827; color: white; font-size: 10px; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.1em; padding: 0;">GIVE</button>
+        <button id="gift-close-btn" style="flex: 1; border: none; border-top: 1px solid #e5e7eb; background: #ffffff; color: #9CA3AF; font-size: 9px; font-weight: 700; cursor: pointer; text-transform: uppercase; padding: 0;">CLOSE</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Define the Elements
+    const prompt = document.getElementById('timed-gift-prompt');
+    const closeBtn = document.getElementById('gift-close-btn');
+    const giveBtn = document.getElementById('gift-give-btn');
+
+    // 2. The Logic to Close the Popup
+    function closePrompt() {
+        if(prompt) {
+            prompt.style.opacity = '0';
+            prompt.style.transform = 'translateY(20px) scale(0.95)';
+            setTimeout(() => { 
+                prompt.style.display = 'none'; 
+            }, 600);
+        }
+    }
+
+    // 3. ATTACH THE CLICK LISTENERS DIRECTLY (This fixes the issue)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();    // Prevent any default browser action
+            e.stopPropagation();   // Stop the click from bubbling up
+            console.log("Close clicked"); 
+            closePrompt();
+        });
+    }
+
+    if (giveBtn) {
+        giveBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Call your global donate function if it exists
+            if (typeof window.toggleDonate === 'function') {
+                window.toggleDonate();
+            } else {
+                console.log("Donate function missing, redirecting...");
+                window.location.href = "#donate"; // Fallback
+            }
+            closePrompt();
+        });
+    }
+
+    // 4. Show the prompt after 4 seconds
+    setTimeout(() => {
+        if(prompt) {
+            prompt.style.display = 'flex';
+            setTimeout(() => {
+                prompt.style.opacity = '1';
+                prompt.style.transform = 'translateY(0) scale(1)';
+            }, 50);
+        }
+    }, 4000);
+
+    // 5. Mission Text Animation
+    const milestones = ["Mission: 72% Monthly Goal", "Status: Supplies Needed", "Community: 500+ Families", "Impact: Active in Laikipia"];
+    let mIdx = 0;
+    setInterval(() => {
+        const mText = document.getElementById('mission-text-feed');
+        if(mText) {
+            mText.style.opacity = 0;
+            setTimeout(() => {
+                mIdx = (mIdx + 1) % milestones.length;
+                mText.innerText = milestones[mIdx];
+                mText.style.opacity = 1;
+            }, 500);
+        }
+    }, 4000);
+
+});
+</script>
+
+  <section id="about" class="py-20 bg-white relative">
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-50 z-0"></div>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            
+            <div class="lg:col-span-5 relative group">
+                <div class="relative h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000" 
+                         alt="Kwetu Care Team" 
+                         class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+
+                <div class="absolute -bottom-10 right-6 bg-white p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-t-4 border-medical-red max-w-[200px]">
+                    <h3 class="text-5xl font-black text-gray-900 mb-1">2<span class="text-[#ED1C24]">+</span></h3>
+                    <p class="text-xs font-bold text-[#009CA6]-400  tracking-widest leading-relaxed">Years of Impact in Laikipia and its Environs</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 pt-8">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="w-12 h-[2px] bg-[#ED1C24]"></span>
+                    <span class="text-[#ED1C24] font-bold uppercase tracking-[0.2em] text-xs">Our Story</span>
+                </div>
+
+                <h2 class="text-4xl md:text-6xl font-bold text-gray-900 mb-10 leading-tight">
+                    Who We Are
+                </h2>
+
+                <p class="text-1.8xl text-gray-800 font-medium leading-relaxed mb-10">
+                    Kwetu Care Foundation is a community-based organization working to bridge healthcare gaps in rural and underserved areas of Kenya, within Laikipia County and neighbouring communities.
+                </p>
+
+                <div class="pl-0 md:pl-8 md:border-l-2 border-gray-200 space-y-6">
+                    <p class="text-0.9g text-gray-500 leading-relaxed">
+                        Founded on the belief that healthcare should be accessible, dignified, and community-centered, we bring care closer to the people who need it most. 
+                    </p>
+                    <p class="text-0.9g text-gray-500 leading-relaxed">
+                        Our approach combines <strong class="text-gray-900">direct medical intervention</strong> with <strong class="text-gray-900">long-term community empowerment</strong>, ensuring health is a lasting legacy.
+                    </p>
+                </div>
+
+                <div class="mt-12 flex flex-wrap gap-6 items-center">
+                
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs">🇰🇪</div>
+                            <div class="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-xs">❤️</div>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-500">Community Centered</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="team">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<div class="antialiased font-['Poppins'] bg-white overflow-hidden">
+    
+    <div class="flex flex-col items-center justify-center py-10 md:py-12 bg-white px-4">
+        <p class="text-[#ED1C24] font-extrabold tracking-[0.3em] text-[10px] uppercase mb-2 text-center">Our Leadership</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-black mb-6 text-center">The Kwetu Care Team</h2>
+        
+        <button onclick="toggleTeamSection()" id="toggle-btn" class="group relative px-8 md:px-12 py-4 bg-black text-white font-bold uppercase tracking-[0.2em] text-[10px] md:text-[11px] rounded-full transition-all hover:shadow-[0_20px_40px_rgba(0,156,166,0.3)] active:scale-95 overflow-hidden">
+            <span id="btn-text" class="relative z-10">Reveal Full Team</span>
+            <div class="absolute inset-0 bg-[#009CA6] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+        </button>
+    </div>
+
+    <section id="kwetu-team-section" class="hidden opacity-0 transform translate-y-10 transition-all duration-700 bg-white pb-20">
+        
+        <style>
+            :root { --kcf-red: #ED1C24; --kcf-teal: #009CA6; }
+            .section-visible { display: block !important; opacity: 1 !important; transform: translate-y-0 !important; }
+
+            /* Founder Hero Styling */
+            .founder-hero {
+                display: flex; flex-direction: column; background: #000; border-radius: 2rem;
+                overflow: hidden; margin-bottom: 4rem; color: white; position: relative;
+            }
+            @media (min-width: 768px) { 
+                .founder-hero { flex-direction: row; min-height: 500px; border-radius: 2.5rem; margin-bottom: 5rem; } 
+            }
+
+            /* Grid Card Styling */
+            .minimal-card {
+                position: relative; border-radius: 1.5rem; overflow: hidden;
+                background-color: #f8f8f8; cursor: pointer; transition: all 0.5s ease;
+            }
+            @media (min-width: 768px) { .minimal-card { border-radius: 2rem; } }
+            
+            .minimal-card img { width: 100%; height: 100%; object-fit: cover; transition: all 0.8s ease; filter: grayscale(100%); }
+            .minimal-card:hover img { filter: grayscale(0%); transform: scale(1.08); }
+
+            .member-label {
+                position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+                background: white; padding: 1rem 1.25rem; border-radius: 1.25rem;
+                display: flex; justify-content: space-between; align-items: center;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 10;
+            }
+            @media (min-width: 768px) { 
+                .member-label { bottom: 1.5rem; left: 1.5rem; right: 1.5rem; padding: 1.25rem 1.5rem; border-radius: 1.5rem; } 
+            }
+            
+            .minimal-card:hover .member-label { background-color: var(--kcf-teal); transform: translateY(-8px); }
+            .minimal-card:hover .member-label h4 { color: white; }
+            .minimal-card:hover .member-label p { color: rgba(255,255,255,0.9); }
+
+            .plus-circle {
+                width: 32px; height: 32px; border-radius: 50%; background: #000;
+                display: flex; align-items: center; justify-content: center;
+                transition: all 0.4s ease; color: white; font-size: 18px;
+            }
+            @media (min-width: 768px) { .plus-circle { width: 36px; height: 36px; font-size: 20px; } }
+            .minimal-card:hover .plus-circle { transform: rotate(90deg) scale(1.2); background: white; color: var(--kcf-teal); }
+
+            /* Modern Modal Animation */
+            .modal-glass { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); }
+        </style>
+
+        <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+            
+            <div class="founder-hero shadow-[0_20px_40px_rgba(0,0,0,0.3)] md:shadow-[0_40px_80px_rgba(0,0,0,0.2)]">
+                <div class="w-full md:w-5/12 relative aspect-square md:aspect-auto md:h-auto overflow-hidden shrink-0">
+                    <img src="https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg" class="w-full h-full object-cover object-top md:object-center">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent md:bg-gradient-to-r"></div>
+                </div>
+                <div class="w-full md:w-7/12 p-8 sm:p-10 md:p-20 flex flex-col justify-center relative bg-[#000]">
+                    <div class="absolute top-6 right-6 md:top-10 md:right-10 opacity-10 text-5xl md:text-[120px] font-extrabold pointer-events-none">LEAD</div>
+                    <span class="text-[#ED1C24] font-black tracking-[0.4em] text-[9px] md:text-[10px] uppercase mb-3 md:mb-4">The Visionary</span>
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2 tracking-tighter">Rosemary Njeri</h2>
+                    <p class="text-[#009CA6] font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] mb-6 md:mb-8">Founder & Lead, Kwetu Care Foundation</p>
+                    
+                    <p class="text-gray-300 md:text-gray-400 text-base md:text-lg italic font-light leading-relaxed mb-8 md:mb-10 border-l-2 border-[#ED1C24] pl-4 md:pl-6">
+                        "Building a future where every community has access to dignity and care is not just our mission, it is our promise."
+                    </p>
+                    
+                    <button onclick="openModernModal(0, true)" class="group flex items-center gap-3 md:gap-4 w-fit px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-full font-extrabold text-[9px] md:text-[10px] uppercase tracking-widest transition-all hover:bg-[#009CA6] hover:text-white">
+                        <span>View Strategy & Roles</span>
+                        <span class="bg-[#ED1C24] w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-white group-hover:scale-125 transition-transform">+</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mb-12 md:mb-16">
+                <h3 class="text-[10px] font-black uppercase tracking-[0.5em] text-gray-400">Collaborators</h3>
+            </div>
+
+            <div id="team-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                </div>
+        </div>
+    </section>
+
+    <div id="modern-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 sm:p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModernModal()"></div>
+        
+        <div class="modal-glass w-full max-w-5xl rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl relative flex flex-col md:flex-row max-h-[92vh] md:max-h-[85vh] scale-90 opacity-0 transition-all duration-500 bg-white" id="modal-content">
+            
+            <button onclick="closeModernModal()" class="absolute top-3 right-3 md:top-8 md:right-8 z-50 w-9 h-9 md:w-12 md:h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-[#ED1C24] transition-all hover:rotate-90 shadow-lg text-sm md:text-lg">✕</button>
+            
+            <div class="w-full md:w-5/12 aspect-square md:aspect-auto md:h-auto overflow-hidden bg-gray-100 shrink-0 relative">
+                <img id="m-img" src="" class="w-full h-full object-cover object-top md:object-center">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent md:hidden pointer-events-none h-24"></div>
+            </div>
+
+            <div class="w-full md:w-7/12 p-6 sm:p-8 md:p-16 overflow-y-auto flex-1 min-h-0 bg-white">
+                <span id="m-role" class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-[#009CA6] text-white font-black text-[8px] md:text-[9px] uppercase tracking-widest rounded-full mb-3 md:mb-4"></span>
+                <h3 id="m-name" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-black mb-1 md:mb-2 tracking-tighter"></h3>
+                <p id="m-avail" class="text-[9px] md:text-[10px] font-bold text-[#ED1C24] uppercase tracking-widest mb-6 md:mb-10"></p>
+                
+                <div class="space-y-6 md:space-y-8">
+                    <div>
+                        <h4 class="text-[10px] md:text-xs font-black uppercase text-black mb-4 flex items-center gap-2">
+                            <span class="w-4 md:w-6 h-0.5 bg-black"></span> Key Responsibilities
+                        </h4>
+                        <ul id="m-responsibilities" class="text-xs md:text-sm text-gray-600 space-y-3 md:space-y-4 font-light leading-relaxed">
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const founder = { name: "Rosemary Njeri", role: "Founder and Lead", avail: "Full-Time", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Provide overall vision, strategy, and leadership to the Foundation","Oversee all programmatic and operational functions","Supervise budgets and ensure total financial accountability","Represent the organization in strategic global partnerships","Spearhead resource mobilization, including grants and sustainability"] };
+
+        const team = [
+            { name: "Dr. Edwin", role: "Deputy Director", avail: "Partial Availability", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Act as the Deputy to the Founder and Lead","Coordinate recruitment and onboarding of volunteer medics","Liaise with the Ministry of Health and county departments","Oversee medication procurement and camp supply readiness","Lead cancer awareness activities and medical compliance"] },
+            { name: "Lizzy", role: "Programs Coordinator", avail: "Part-Time", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Design and implement health and wellness programs","Handle social media and front-facing content creation","Serve as Team Secretary and lead all documentation","Coordinate corporate partnerships and stakeholder relationships","Track program performance and report impact data"] },
+            { name: "Dr. Sylvia", role: "Clinical Programs", avail: "Full-Time", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Lead the design of all clinical and community programs","Coordinate diabetes and hypertension support groups","Provide medical oversight during medical camps","Develop health program content and educational materials","Liaise with health facility partners for program delivery"] },
+            { name: "Kwamboka", role: "Community Programs", avail: "Flexible (Field-Focused)", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Virtual coordination of support groups and sessions","Serve as Lead Nurse during all medical camps","Develop and deliver community health education content","Mentor community health volunteers and nurses","Contribute to storytelling and impact sharing"] },
+            { name: "Allan", role: "Programs & Strategy", avail: "Part-Time", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Coordinate logistics for camps and outreach events","Lead Monitoring, Evaluation & Learning (MEL) efforts","Contribute to digitization and systems streamlining","Provide process improvement and operational workflows"] },
+            { name: "Yvonne", role: "Finance & Grants", avail: "Flexible", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Manage bookkeeping, budgets, and reconciliations","Track expenditures and ensure donor compliance","Support Dr. Edwin in cancer awareness activities","Maintain donor records and grant reporting requirements"] },
+            { name: "Kevin", role: "Tech & Innovation", avail: "Flexible", img: "https://i.pinimg.com/736x/f4/2c/24/f42c24c211fcd892e736fe94e16a6dea.jpg", tasks: ["Lead development of technology and digitization systems","Provide strategic tech input for partnerships","Support team capacity building on tech tools","Co-develop innovation strategies for service delivery"] },
+            { name: "Dr. Lilian", role: "Medical Camps Advisor", avail: "Camp-Based", img: "https://i.pinimg.com/736x/c7/fc/44/c7fc44a934403ecc38c32b497b72839e.jpg", tasks: ["Provide high-level medical oversight during camps","Offer guidance on clinical standards and compliance","Support mentorship of junior medics and volunteers","Liaise with county health teams for field delivery"] },
+            { name: "Nick", role: "Comms & Medic", avail: "Occasional", img: "https://i.pinimg.com/736x/83/0b/fb/830bfbd8abb143d6a415317aab881d62.jpg", tasks: ["Support social media strategy and content creation","Manage live updates during medical camps","Participate in medical camps as a volunteer medic"] },
+            { name: "Dr. Wambwire", role: "Senior Medical Advisor", avail: "Advisory (Remote)", img: "https://i.pinimg.com/736x/62/ba/75/62ba75f748cbc73bb2b71dc6b5322357.jpg", tasks: ["Provide strategic guidance on community health programs","Advise on clinical protocols and best practices","Support quality assurance of health interventions","Thought partner on emerging health trends"] }
+        ];
+
+        const container = document.getElementById('team-grid-container');
+        team.forEach((m, i) => {
+            container.innerHTML += `
+                <div onclick='openModernModal(${i}, false)' class="minimal-card aspect-[4/5] group">
+                    <img src="${m.img}" alt="${m.name}">
+                    <div class="member-label">
+                        <div class="pr-2">
+                            <h4 class="font-extrabold text-black text-[13px] md:text-sm mb-0.5 truncate">${m.name}</h4>
+                            <p class="text-[8px] md:text-[9px] text-[#009CA6] font-extrabold uppercase tracking-widest truncate">${m.role}</p>
+                        </div>
+                        <div class="plus-circle shrink-0">+</div>
+                    </div>
+                </div>
+            `;
+        });
+
+        function toggleTeamSection() {
+            const sec = document.getElementById('kwetu-team-section');
+            const btn = document.getElementById('btn-text');
+            if(sec.classList.contains('section-visible')){
+                sec.classList.remove('section-visible');
+                btn.textContent = "Reveal Full Team";
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+                sec.classList.add('section-visible');
+                btn.textContent = "Hide Full Team";
+                setTimeout(() => sec.scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
+            }
+        }
+
+        function openModernModal(index, isFounder) {
+            const d = isFounder ? founder : team[index];
+            document.getElementById('m-img').src = d.img;
+            document.getElementById('m-name').textContent = d.name;
+            document.getElementById('m-role').textContent = d.role;
+            document.getElementById('m-avail').textContent = `Status: ${d.avail}`;
+            document.getElementById('m-responsibilities').innerHTML = d.tasks.map(t => `<li class="flex gap-3 md:gap-4"><span class="text-[#ED1C24] font-bold mt-0.5 md:mt-0">•</span> <span class="flex-1">${t}</span></li>`).join('');
+            
+            document.getElementById('modern-modal').classList.remove('hidden');
+            document.getElementById('modern-modal').classList.add('flex');
+            setTimeout(() => document.getElementById('modal-content').classList.add('scale-100', 'opacity-100'), 50);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModernModal() {
+            document.getElementById('modal-content').classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                document.getElementById('modern-modal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 400);
+        }
+    </script>
+</div>
+</section>
+</script>
+    <section id="exist" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6 md:px-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Why We Exist</h2>
+            <div class="w-12 h-1 bg-red-600 mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white shadow-sm border border-gray-100 flex flex-col h-full overflow-hidden">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://i.pinimg.com/1200x/e7/c5/bc/e7c5bc6bf9da64f0e87ad46c2f63b58c.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="Preventable Deaths">
+                </div>
+                <div class="p-8 flex flex-col items-center text-center flex-grow">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Stop Preventable Deaths</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Reducing mortality through early screening and rapid response in high-risk zones.</p>
+                    <button onclick="openCause('preventable-deaths')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-sm border border-gray-100 flex flex-col h-full overflow-hidden">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://i.pinimg.com/736x/dd/8b/4b/dd8b4b5dd10c260be178b31adb2d837b.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="Education First">
+                </div>
+                <div class="p-8 flex flex-col items-center text-center flex-grow">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Education First</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Giving families the knowledge to maintain hygiene and nutrition through digital tools.</p>
+                    <button onclick="openCause('education-first')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-sm border border-gray-100 flex flex-col h-full overflow-hidden">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://i.pinimg.com/736x/cc/8c/37/cc8c379ebbb707bf012bb80c2fa25cd1.jpg" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt="Elderly Dignity">
+                </div>
+                <div class="p-8 flex flex-col items-center text-center flex-grow">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Elderly Dignity</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Ensuring our seniors receive specialized medical attention and the respect they deserve.</p>
+                    <button onclick="openCause('elderly-dignity')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="mission-impact" class="py-24 bg-[#FDFDFD] relative overflow-hidden">
+    
+    <div class="absolute top-1/2 left-0 w-full h-px bg-slate-100 -z-10"></div>
+
+    <div class="container mx-auto px-6 md:px-16">
+        <div class="flex flex-col lg:flex-row gap-16 items-center">
+            
+            <div class="lg:w-5/12">
+                <div class="inline-block px-3 py-1 bg-red-50 text-medical-red text-[10px] font-bold uppercase tracking-widest rounded-full mb-6">
+                    Our Mission
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif text-slate-900 leading-tight mb-8">
+                    Dignity in every <br>
+                    <span class="text-medical-red">Community.</span>
+                </h2>
+                <div class="space-y-6 text-slate-600 text-lg leading-relaxed">
+                    <p>
+                        Kwetu Care Foundation brings dignified, community-centered healthcare to the most underserved parts of Kenya.
+                    </p>
+                    <p class="text-base">
+                        Through free medical camps, chronic illness support, maternal care, and grassroots partnerships, we’re building a system where everyone, no matter their location or income, can get the care they need.
+                    </p>
+                    <p class="font-bold text-slate-800 border-l-4 border-medical-red pl-4">
+                        We don’t just treat symptoms. We build systems of care that last.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:w-7/12 w-full relative h-[500px] flex items-center">
+                
+                <svg class="absolute inset-0 w-full h-full overflow-visible" viewBox="0 0 700 500" fill="none">
+                    <path d="M50,100 C150,100 200,400 350,400 C500,400 550,100 650,100" 
+                          stroke="#F1F5F9" stroke-width="6" stroke-linecap="round" />
+                    <path class="continuous-path" d="M50,100 C150,100 200,400 350,400 C500,400 550,100 650,100" 
+                          stroke="#D60C3D" stroke-width="6" stroke-linecap="round" stroke-dasharray="100, 1000" />
+                </svg>
+
+                <div class="absolute top-[10%] left-[0%] group">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-50 text-center transition-all group-hover:-translate-y-2">
+                        <div class="text-2xl font-black text-slate-900 counter" data-target="15420">15,420</div>
+                        <div class="text-[10px] font-bold text-medical-red uppercase tracking-widest">Patients</div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-[10%] left-[35%] group">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-50 text-center transition-all group-hover:-translate-y-2">
+                        <div class="text-2xl font-black text-slate-900 counter" data-target="84">84</div>
+                        <div class="text-[10px] font-bold text-medical-red uppercase tracking-widest">Villages</div>
+                    </div>
+                </div>
+
+                <div class="absolute top-[10%] left-[70%] group">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl border border-slate-50 text-center transition-all group-hover:-translate-y-2">
+                        <div class="text-2xl font-black text-slate-900 counter" data-target="582">582</div>
+                        <div class="text-[10px] font-bold text-medical-red uppercase tracking-widest">Volunteers</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Continuous Flow Animation */
+    .continuous-path {
+        animation: flowLoop 8s linear infinite;
+    }
+
+    @keyframes flowLoop {
+        from { stroke-dashoffset: 1100; }
+        to { stroke-dashoffset: 0; }
+    }
+</style>
+
+<script>
+    // Intersection Observer for counting numbers
+    const startMissionCounters = () => {
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(c => {
+            const target = +c.getAttribute('data-target');
+            let current = 0;
+            const inc = target / 100;
+            const update = () => {
+                if (current < target) {
+                    current += inc;
+                    c.innerText = Math.ceil(current).toLocaleString();
+                    requestAnimationFrame(update);
+                } else {
+                    c.innerText = target.toLocaleString();
+                }
+            };
+            update();
+        });
+    };
+
+    const missionObserver = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) {
+            startMissionCounters();
+            missionObserver.unobserve(entries[0].target);
+        }
+    }, { threshold: 0.5 });
+
+    missionObserver.observe(document.querySelector('#mission-impact'));
+</script>
+<style>
+    /* Hide scrollbar while keeping functionality */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* The "Nudge" Animation - triggers on load to hint at scrollability */
+    @keyframes scrollHint {
+        0% { transform: translateX(0); }
+        15% { transform: translateX(-40px); }
+        30% { transform: translateX(0); }
+    }
+
+    @media (max-width: 768px) {
+        .kc-scroll-hint {
+            animation: scrollHint 1.2s ease-in-out 1s; /* Brief nudge after 1s delay */
+        }
+    }
+</style>
+
+<section id="programs" class="max-w-[1440px] mx-auto py-16 md:py-24 bg-white font-['Poppins'] antialiased overflow-hidden">
+    
+    <div class="mb-12 md:mb-20 text-center max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl text-black font-semibold tracking-tight mb-6">Our Care Model</h2>
+        <p class="text-black/80 md:text-lg font-light leading-relaxed">
+            We go beyond one-off medical interventions. Our model is built on preventive, curative, 
+            and rehabilitative care, delivered through a network of committed partners and professionals.
+        </p>
+    </div>
+
+    <div class="kc-scroll-hint flex overflow-x-auto md:flex-wrap md:justify-center gap-4 md:gap-x-8 md:gap-y-16 px-6 pb-12 md:pb-0 snap-x snap-mandatory hide-scrollbar">
+        
+        <div class="min-w-[82vw] sm:min-w-[320px] md:min-w-0 md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] max-w-sm flex-shrink-0 snap-center flex flex-col items-center text-center bg-slate-50 md:bg-transparent p-8 md:p-0 rounded-[2.5rem]">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#009CA6] flex items-center justify-center mb-6 shadow-[0_10px_25px_rgba(0,156,166,0.2)] transition-transform hover:scale-105 duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 md:w-14 md:h-14 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12M12 8.25v4.5m2.25-2.25H9.75" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-black tracking-tight mb-3">Mobile Medical Camps</h3>
+            <p class="text-black/70 font-light text-sm leading-relaxed">Free checkups, referrals, and specialized care for marginalized populations and rural communities.</p>
+        </div>
+
+        <div class="min-w-[82vw] sm:min-w-[320px] md:min-w-0 md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] max-w-sm flex-shrink-0 snap-center flex flex-col items-center text-center bg-slate-50 md:bg-transparent p-8 md:p-0 rounded-[2.5rem]">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#009CA6] flex items-center justify-center mb-6 shadow-[0_10px_25px_rgba(0,156,166,0.2)] transition-transform hover:scale-105 duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 md:w-14 md:h-14 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-black tracking-tight mb-3">Support Groups</h3>
+            <p class="text-black/70 font-light text-sm leading-relaxed">Ongoing care and emotional support for people living with chronic illnesses like diabetes and hypertension.</p>
+        </div>
+
+        <div class="min-w-[82vw] sm:min-w-[320px] md:min-w-0 md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] max-w-sm flex-shrink-0 snap-center flex flex-col items-center text-center bg-slate-50 md:bg-transparent p-8 md:p-0 rounded-[2.5rem]">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#009CA6] flex items-center justify-center mb-6 shadow-[0_10px_25px_rgba(0,156,166,0.2)] transition-transform hover:scale-105 duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 md:w-14 md:h-14 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-black tracking-tight mb-3">Maternal & Child Health</h3>
+            <p class="text-black/70 font-light text-sm leading-relaxed">Integrated services supporting nutrition, safe delivery, and childhood wellness screenings.</p>
+        </div>
+
+        <div class="min-w-[82vw] sm:min-w-[320px] md:min-w-0 md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] max-w-sm flex-shrink-0 snap-center flex flex-col items-center text-center bg-slate-50 md:bg-transparent p-8 md:p-0 rounded-[2.5rem]">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#009CA6] flex items-center justify-center mb-6 shadow-[0_10px_25px_rgba(0,156,166,0.2)] transition-transform hover:scale-105 duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 md:w-14 md:h-14 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-black tracking-tight mb-3">Health Promotion</h3>
+            <p class="text-black/70 font-light text-sm leading-relaxed">Collaborating with local leaders to spread knowledge and encourage early diagnosis and prevention.</p>
+        </div>
+
+        <div class="min-w-[82vw] sm:min-w-[320px] md:min-w-0 md:w-[calc(50%-2rem)] lg:w-[calc(33.333%-2rem)] max-w-sm flex-shrink-0 snap-center flex flex-col items-center text-center bg-slate-50 md:bg-transparent p-8 md:p-0 rounded-[2.5rem]">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full bg-[#009CA6] flex items-center justify-center mb-6 shadow-[0_10px_25px_rgba(0,156,166,0.2)] transition-transform hover:scale-105 duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 md:w-14 md:h-14 text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-black tracking-tight mb-3">Policy Advocacy</h3>
+            <p class="text-black/70 font-light text-sm leading-relaxed">Engaging with decision-makers to influence health policy on cost-sharing and universal access.</p>
+        </div>
+
+    </div>
+
+    <div class="flex md:hidden justify-center items-center gap-2 mt-2">
+        <div class="w-8 h-1 bg-[#009CA6] rounded-full"></div>
+        <div class="w-2 h-1 bg-black/10 rounded-full"></div>
+        <div class="w-2 h-1 bg-black/10 rounded-full"></div>
+        <div class="w-2 h-1 bg-black/10 rounded-full"></div>
+        <div class="w-2 h-1 bg-black/10 rounded-full"></div>
+    </div>
+</section>
+<div id="cause-overlay" class="fixed inset-0 z-[100] hidden bg-white overflow-y-auto">
+    <div class="sticky top-0 bg-white/95 backdrop-blur-md z-[110] border-b border-gray-100 px-6 py-4 flex justify-between items-center shadow-sm">
+        <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Resource Library / Kwetu Care</span>
+        <button onclick="closeCause()" class="bg-gray-100 hover:bg-[#ED1C24] hover:text-red-600 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center text-2xl transition shadow-sm">
+            &times;
+        </button>
+    </div>
+
+    <div id="preventable-deaths" class="cause-content hidden py-12 animate-fade-in">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <div class="lg:col-span-8">
+                    <img src="https://i.pinimg.com/1200x/e7/c5/bc/e7c5bc6bf9da64f0e87ad46c2f63b58c.jpg" class="w-full h-72 md:h-[500px] object-cover rounded-3xl mb-10 shadow-xl">
+                    
+                    <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">Combatting Preventable Mortality in Rural Kenya</h1>
+                    
+                    <div class="prose prose-lg text-gray-700 space-y-6 leading-relaxed">
+                        <p class="text-xl text-gray-500 italic border-l-4 border-medical-red pl-4">"The geography of a patient should not determine their survival."</p>
+                        
+                        <p>In many rural communities across Laikipia, simple geography is often a death sentence. Diseases like malaria, pneumonia, and diarrhea remain the leading causes of mortality, despite being entirely preventable and treatable with basic medicine. For a mother in a remote village, the nearest clinic might be a four-hour walk away. Kwetu Care bridges this specific gap through our Mobile Diagnostic Hubs, effectively bringing the hospital to the doorstep of the most vulnerable.</p>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mt-8">The "Last Mile" Health Challenge</h3>
+                        <p>The concept of the "Last Mile" is usually applied to logistics, but in healthcare, it is a matter of life and death. Traditional healthcare models rely on patients coming to facilities. We flip this model. By deploying motorbike nurses and off-road mobile clinics, we reduce the time-to-treatment from days to minutes. Our teams are equipped with rapid diagnostic kits (RDTs), portable ultrasound tech, and essential antibiotics to identify complications before they become fatal.</p>
+
+                        <p>Furthermore, we are tackling the crisis of maternal mortality. Complications during pregnancy and childbirth are often detectable early, yet without regular prenatal checkups, they go unnoticed until it is too late. Our mobile units conduct on-site antenatal care, screening for pre-eclampsia, anemia, and fetal distress. By catching these issues early, we can arrange safe transport to higher-level facilities long before an emergency occurs.</p>
+
+                        <div class="bg-red-50 p-8 rounded-3xl border-l-8 border-red-500 my-10">
+                            <p class="font-bold text-red-900 mb-2">Global Data Context:</p>
+                            <p class="text-red-800 text-sm mb-4">Every day, over 800 women die from preventable causes related to pregnancy and childbirth. 94% of all maternal deaths occur in low and lower-middle-income countries.</p>
+                            <a href="https://www.who.int/news-room/fact-sheets/detail/maternal-mortality" target="_blank" class="text-red-700 underline font-black text-sm uppercase tracking-wide">View WHO Maternal Health Data &rarr;</a>
+                        </div>
+
+                        <p>Finally, sustainability lies in local empowerment. We don't just treat patients; we train Community Health Volunteers (CHVs). These are trusted members of the village who are trained to recognize danger signs, administer first aid, and manage referrals. By embedding knowledge within the community, we ensure that the fight against preventable death continues even when our mobile trucks act elsewhere. This network of surveillance is our strongest weapon against outbreaks and unchecked chronic conditions.</p>
+                    </div>
+                </div>
+
+                 <div class="lg:col-span-4 space-y-8">
+                    <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-28">
+                        <h3 class="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider">Related Initiatives</h3>
+                        
+                        <div class="space-y-6">
+                            <div onclick="switchArticle('education-first')" class="group cursor-pointer flex gap-4 items-start">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                    <img src="https://i.pinimg.com/736x/dd/8b/4b/dd8b4b5dd10c260be178b31adb2d837b.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 group-hover:text-medical-red transition leading-tight mb-1">Education: The Ultimate Vaccine</h4>
+                                    <p class="text-xs text-gray-500">How literacy saves lives.</p> <button onclick="openCause('education-first')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                                </div>
+                            </div>
+
+                            <div onclick="switchArticle('elderly-dignity')" class="group cursor-pointer flex gap-4 items-start">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                    <img src="https://i.pinimg.com/736x/cc/8c/37/cc8c379ebbb707bf012bb80c2fa25cd1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 group-hover:text-[#ED1C24] transition leading-tight mb-1">Aging with Dignity</h4>
+                                    <p class="text-xs text-gray-500">Home-based geriatric care.</p><button onclick="openCause('elderly-dignity')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <p class="text-sm text-gray-500 mb-4">Want to support this cause?</p>
+                            <button onclick="closeCause(); toggleDonate()" class="w-full py-3 bg-gray-900 text-white rounded-xl font-bold text-sm hover:bg-medical-red transition">Donate Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="education-first" class="cause-content hidden py-12 animate-fade-in">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <div class="lg:col-span-8">
+                    <img src="https://i.pinimg.com/736x/dd/8b/4b/dd8b4b5dd10c260be178b31adb2d837b.jpg" class="w-full h-72 md:h-[500px] object-cover rounded-3xl mb-10 shadow-xl">
+                    
+                    <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">Education: The Ultimate Vaccine</h1>
+                    
+                    <div class="prose prose-lg text-gray-700 space-y-6 leading-relaxed">
+                        <p>Knowledge isn't just power; in health, it is survival. Our "Education First" initiative focuses on health literacy, ensuring families understand not just the "how" but the "why" behind hygiene, nutrition, and disease management. When a community understands the germ theory of disease, handwashing stops being a chore and becomes a shield. When a mother understands nutritional groups, a simple meal becomes preventative medicine.</p>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mt-8">Breaking Cultural Taboos</h3>
+                        <p>One of the most significant barriers to rural health is misinformation and cultural stigma. Whether it is hesitation regarding vaccines or dangerous misconceptions about reproductive health, silence costs lives. Kwetu Care uses education to gently but firmly dismantle these barriers. We organize "Health Barazas" (community gatherings) where elders and doctors sit together to discuss health topics openly, merging traditional wisdom with modern medical science to create a consensus that favors life.</p>
+
+                        <p>We also utilize modern technology to overcome literacy barriers. Our teams carry tablets loaded with visual storytelling apps and mobile-optimized content. This allows us to teach complex concepts—like how a virus spreads or how sugar affects the body—to populations that may not read or write. By using diagrams, videos, and local language voiceovers, we ensure that the message is accessible to everyone, from the grandmother raising her grandkids to the young herdsman in the field.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+                            <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                                <h4 class="font-bold text-blue-900 mb-2">Sanitation Impact</h4>
+                                <p class="text-sm">Proper handwashing and hygiene education can reduce diarrheal diseases by over 40%, saving thousands of children annually.</p>
+                            </div>
+                            <div class="bg-orange-50 p-6 rounded-2xl border border-orange-100">
+                                <h4 class="font-bold text-orange-900 mb-2">Sustainable Diet</h4>
+                                <p class="text-sm">Teaching communities to utilize drought-resistant local crops (like sorghum and millet) for high-nutrient meals.</p>
+                            </div>
+                        </div>
+
+                        <p>Ultimately, our goal is generational change. We run "Health Clubs" in local primary schools where children become Health Ambassadors. They learn about first aid, sanitation, and nutrition, taking these lessons home to their parents. When a child reminds their parent to wash their hands or boil drinking water, the dynamic of the household changes. Education is the only health intervention that pays dividends for decades after the initial investment.</p>
+                    </div>
+                </div>
+
+               <div class="lg:col-span-4 space-y-8">
+                    <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-28">
+                        <h3 class="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider">Related Initiatives</h3>
+                        
+                        <div class="space-y-6">
+                            <div onclick="switchArticle('preventable-deaths')" class="group cursor-pointer flex gap-4 items-start">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                    <img src="https://i.pinimg.com/1200x/e7/c5/bc/e7c5bc6bf9da64f0e87ad46c2f63b58c.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 group-hover:text-[#ED1C24] transition leading-tight mb-1">Preventable Mortality</h4>
+                                    <p class="text-xs text-gray-500">Fighting the last mile crisis.</p><button onclick="openCause('preventable-deaths')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                                </div>
+                            </div>
+
+                            <div onclick="switchArticle('elderly-dignity')" class="group cursor-pointer flex gap-4 items-start">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                    <img src="https://i.pinimg.com/736x/cc/8c/37/cc8c379ebbb707bf012bb80c2fa25cd1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 group-hover:text-medical-red transition leading-tight mb-1">Aging with Dignity</h4>
+                                    <p class="text-xs text-gray-500">Home-based geriatric care.</p><button onclick="openCause('elderly-dignity')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <p class="text-sm text-gray-500 mb-4">Want to support this cause?</p>
+                            <button onclick="closeCause(); toggleDonate()" class="w-full py-3 bg-gray-900 text-white rounded-xl font-bold text-sm hover:bg-medical-red transition">Donate Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="elderly-dignity" class="cause-content hidden py-12 animate-fade-in">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <div class="lg:col-span-8">
+                    <img src="https://i.pinimg.com/736x/cc/8c/37/cc8c379ebbb707bf012bb80c2fa25cd1.jpg" class="w-full h-72 md:h-[500px] object-cover rounded-3xl mb-10 shadow-xl">
+                    
+                    <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">Aging with Dignity and Respect</h1>
+                    
+                    <div class="prose prose-lg text-gray-700 space-y-6 leading-relaxed">
+                        <p>As the "backbone" of our society, the elderly are guardians of our history and culture. Yet, in traditional aid models, they are often the most overlooked demographic. As urbanization pulls younger generations toward cities, many elderly individuals in rural Laikipia are left isolated, facing the dual burden of poverty and failing health. Our mission at Kwetu Care is to ensure that aging does not mean suffering in silence and that dignity is preserved until the very end.</p>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mt-8">The Silent Epidemic of NCDs</h3>
+                        <p>While infectious diseases get the headlines, Non-Communicable Diseases (NCDs) like hypertension, diabetes, and arthritis are the silent killers of the elderly poor. Without regular medication, a manageable condition like high blood pressure leads to strokes that leave elders bedridden and helpless. Our Home-Based Geriatric Care program tackles this head-on. Many of our seniors cannot walk to clinics, so we go to them. Our motorbike nurses deliver chronic medication, provide physical therapy, and monitor vitals on a monthly schedule.</p>
+
+                        <blockquote class="border-l-8 border-medical-red pl-8 my-10 text-2xl font-serif italic text-gray-800 bg-gray-50 py-6 pr-6 rounded-r-xl">
+                            "Helping one senior live without pain is honoring the history of our entire village. We don't just treat bodies; we honor souls."
+                        </blockquote>
+
+                        <p>Beyond physical health, we address the crushing weight of social isolation. Depression is rampant among the rural elderly who feel left behind. Our program includes "Social Check-ins," where volunteers spend time simply talking, listening to stories, and helping with small household chores. We are also piloting intergenerational programs, connecting local youth with elderly "grandparents" for mentorship. This restores a sense of purpose to the elderly, reminding them that they still have value to contribute to the community.</p>
+
+                        <p>Looking ahead, the demographics of Africa are changing. By 2050, the number of people aged 60 and over will double. Kwetu Care is building the infrastructure for this future now. We are advocating for community-based insurance schemes that cover geriatric care and training families on how to care for aging relatives with compassion. We believe that a society is judged by how it treats its most vulnerable, and we are determined to make Laikipia a model of elder compassion.</p>
+                    </div>
+                </div>
+<div class="lg:col-span-4 space-y-8">
+                    <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 sticky top-28">
+                        <h3 class="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider">Related Initiatives</h3>
+                        
+                        <div class="space-y-6">
+                            <div onclick="switchArticle('preventable-deaths')" class="group cursor-pointer flex gap-4 items-start">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                    <img src="https://i.pinimg.com/1200x/e7/c5/bc/e7c5bc6bf9da64f0e87ad46c2f63b58c.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 group-hover:text-medical-red transition leading-tight mb-1">Preventable Mortality</h4>
+                                    <p class="text-xs text-gray-500">Fighting the last mile crisis.</p><button onclick="openCause('preventable-deaths')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                                </div>
+                            </div>
+
+                            <div onclick="switchArticle('elderly-dignity')" class="group cursor-pointer flex gap-4 items-start">
+                                <div class="w-20 h-20 rounded-xl overflow-hidden shrink-0">
+                                    <img src="https://i.pinimg.com/736x/dd/8b/4b/dd8b4b5dd10c260be178b31adb2d837b.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                                <div>
+                                     <h4 class="font-bold text-gray-900 group-hover:text-medical-red transition leading-tight mb-1">Education: The Ultimate Vaccine</h4>
+                                    <p class="text-xs text-gray-500">How literacy saves lives.</p> <button onclick="openCause('education-first')" class="mt-auto text-[#ED1C24] font-bold text-[11px] uppercase tracking-widest flex items-center hover:opacity-80 transition">
+                        Learn More <span class="ml-2 text-xs">›</span>
+                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <p class="text-sm text-gray-500 mb-4">Want to support this cause?</p>
+                            <button onclick="closeCause(); toggleDonate()" class="w-full py-3 bg-gray-900 text-white rounded-xl font-bold text-sm hover:bg-medical-red transition">Donate Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+                        <div class="mt-8 pt-8 border-t border-gray-200">
+                            <p class="text-sm text-gray-500 mb-4">Want to support this cause?</p>
+                            <button onclick="closeCause(); toggleDonate()" class="w-full py-3 bg-gray-900 text-white rounded-xl font-bold text-sm hover:bg-medical-red transition">Donate Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+ function switchArticle(targetId) {
+    const statusText = document.querySelector('.tracking-widest.text-gray-400');
+    
+    // Update breadcrumb/status based on the 'Why'
+    const missionMap = {
+        'preventable-deaths': 'Mission: Closing the Distance',
+        'education-first': 'Mission: Empowering through Knowledge',
+        'elderly-dignity': 'Mission: Restoring Dignity'
+    };
+    
+    if(missionMap[targetId]) statusText.innerText = missionMap[targetId];
+    
+    // ... existing logic ...
+}
+</script>
+<script>
+function openCause(causeId) {
+    const overlay = document.getElementById('cause-overlay');
+    const contents = document.querySelectorAll('.cause-content');
+
+    // Hide all sub-pages first
+    contents.forEach(content => content.classList.add('hidden'));
+
+    // Show the specific sub-page
+    document.getElementById(causeId).classList.remove('hidden');
+
+    // Show the main overlay container
+    overlay.classList.remove('hidden');
+
+    // Lock scroll on the main body
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCause() {
+    const overlay = document.getElementById('cause-overlay');
+    overlay.classList.add('hidden');
+
+    // Unlock scroll
+    document.body.style.overflow = 'auto';
+}
+</script>
+
+<style>
+/* Smooth entry animation */
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ensure long text doesn't look cramped */
+.prose h2 {
+    margin-top: 2rem;
+}
+</style>
+<section id="Stories" class="max-w-[1440px] mx-auto px-6 py-12 md:py-20 font-['Poppins'] antialiased">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 border-b border-black/10 pb-6">
+        <div class="mb-4 md:mb-0">
+            <span class="text-[#ED1C24] font-extrabold uppercase tracking-[0.2em] text-xs">Medical Foundation</span>
+            <h2 class="font-semibold tracking-tighter text-4xl md:text-5xl text-black mt-2">Foundation Insights</h2>
+        </div>
+    </div>
+
+    <div class="kc-scroll-track">
+        
+        <div onclick="kcRead('laikipia-mobile')" class="kc-feature-card relative cursor-pointer group rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+            <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Mobile Clinic">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 kc-overlay-grad"></div>
+            <div class="absolute bottom-8 left-8 right-8 text-white">
+                <p class="text-[#009CA6] font-extrabold text-xs uppercase tracking-[0.15em] mb-2">Remote Access</p>
+                <h3 class="text-2xl font-semibold leading-tight tracking-tight">Beyond the Road: Reaching Ol Moran</h3>
+            </div>
+        </div>
+
+        <div onclick="kcRead('maternal-care')" class="kc-feature-card relative cursor-pointer group rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+            <img src="https://images.unsplash.com/photo-1531050171669-0101230e52f6?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Maternal Health">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 kc-overlay-grad"></div>
+            <div class="absolute bottom-8 left-8 right-8 text-white">
+                <p class="text-[#009CA6] font-extrabold text-xs uppercase tracking-[0.15em] mb-2">Safe Delivery</p>
+                <h3 class="text-2xl font-semibold leading-tight tracking-tight">Maternal Health in Samburu North</h3>
+            </div>
+        </div>
+
+        <div onclick="kcRead('chronic-care')" class="kc-feature-card relative cursor-pointer group rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Clinic Care">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 kc-overlay-grad"></div>
+            <div class="absolute bottom-8 left-8 right-8 text-white">
+                <p class="text-[#009CA6] font-extrabold text-xs uppercase tracking-[0.15em] mb-2">Wellness</p>
+                <h3 class="text-2xl font-semibold leading-tight tracking-tight">The Silent Burden: Hypertension Trials</h3>
+            </div>
+        </div>
+
+        <div onclick="kcRead('surgical-outreach')" class="kc-feature-card relative cursor-pointer group rounded-3xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Surgery">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 kc-overlay-grad"></div>
+            <div class="absolute bottom-8 left-8 right-8 text-white">
+                <p class="text-[#009CA6] font-extrabold text-xs uppercase tracking-[0.15em] mb-2">Surgical Outreach</p>
+                <h3 class="text-2xl font-semibold leading-tight tracking-tight">Restoring Vision in Isiolo County</h3>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div id="kc-reader-overlay" class="fixed inset-0 z-[100] bg-white overflow-y-auto font-['Poppins'] antialiased" style="display: none;">
+    
+    <header class="sticky top-0 bg-white/95 backdrop-blur-md border-b border-black/10 z-50 px-6 md:px-8 py-4 flex justify-between items-center">
+        
+        <div class="flex items-center gap-3 w-max scale-[0.85] md:scale-100 origin-left">
+            <div class="flex flex-col justify-center min-w-[180px]">
+                <span class="text-2xl md:text-3xl font-black tracking-tighter uppercase text-black leading-none mb-1 md:mb-2">KWETU CARE</span>
+                <div class="flex items-center w-full gap-2">
+                    <div class="h-[2px] flex-grow bg-[#ED1C24]"></div>
+                    <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] text-[#ED1C24] uppercase leading-none">Foundation</span>
+                    <div class="h-[2px] flex-grow bg-[#ED1C24]"></div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="kcClose()" class="w-12 h-12 rounded-full bg-black text-white text-3xl hover:bg-[#ED1C24] transition-colors flex items-center justify-center pb-1 shadow-[0_5px_15px_rgba(0,0,0,0.2)]">&times;</button>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-8" id="kc-article-inject"></div>
+
+        <aside class="lg:col-span-4">
+            <div class="sticky top-28 space-y-12">
+                <div class="bg-black rounded-[2rem] p-10 text-white shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+                    <h4 class="text-3xl font-extrabold mb-4 tracking-tight">Direct Impact</h4>
+                    <p class="text-white opacity-70 mb-8 font-light leading-relaxed">Your $50 donation covers the fuel for one mobile clinic mission to a remote village in Laikipia.</p>
+                    <a href="javascript:void(0)" onclick="toggleDonate()" class="block w-full py-4 bg-[#ED1C24] text-white text-center font-bold text-sm rounded-xl hover:bg-[#009CA6] transition-colors uppercase tracking-[0.2em] shadow-[0_10px_20px_rgba(237,28,36,0.3)]">Donate Today</a>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-black text-lg mb-6 border-l-4 border-[#009CA6] pl-4 uppercase tracking-[0.1em]">Medical Resources</h4>
+                    <nav id="kc-sidebar-links" class="space-y-4"></nav>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div id="kc-data-store" class="hidden font-['Poppins']">
+    
+    <div id="data-laikipia-mobile">
+        <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?q=80&w=1200" class="w-full h-[400px] md:h-[500px] object-cover rounded-[2rem] mb-12 shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
+        <h1 class="text-4xl md:text-6xl mb-10 font-bold text-black leading-[1.1] tracking-tighter">Reaching the Last Mile in Ol Moran</h1>
+        <div class="space-y-8 text-lg md:text-xl text-black opacity-80 font-light leading-relaxed">
+            <p>In the vast, semi-arid landscapes of Laikipia West, the village of Ol Moran stands as a testament to the "tyranny of distance." For many families here, the nearest sub-county hospital is over 40 kilometers away, often across terrain that is impassable during the rainy season. Our mobile medical outreach was specifically designed to bridge this gap, ensuring that basic primary care is a right, not a geographical privilege.</p>
+            <p>Our mobile units are rugged, 4x4 clinics on wheels, equipped with cold-chain storage for vaccines, point-of-care testing for malaria and HIV, and a well-stocked pharmacy of essential antibiotics. Every two weeks, our team of clinicians and nurses sets up a temporary station under the shade of acacia trees, serving upwards of 150 patients in a single day who would otherwise have no access to medical expertise.</p>
+            <p>During our recent intervention in Laikipia, we discovered a significant spike in pediatric respiratory infections. Because our team returns to the same sites regularly, we were able to identify that a local drought had led to increased dust exposure in poorly ventilated dwellings. This allowed us to not only treat the infections but provide "Healthy Home" education to the village elders to mitigate future risks.</p>
+            <p>Trust is our most vital asset. In remote areas, there is often a deep-seated suspicion of outsiders. By hiring and training Community Health Volunteers (CHVs) from within the local population, we ensure our medical advice is delivered in the native dialect and within a cultural context that resonates with the elders and mothers of the community.</p>
+            <p>The operational cost of these missions is immense, particularly regarding vehicle maintenance and fuel. However, the cost of inaction is far higher. A preventable infection left untreated in a child can lead to permanent disability or death, devastating a family's economic future. Our mobile clinics are the first line of defense against such tragedies in the most remote corners of the county.</p>
+            <p>We are currently looking to add a third vehicle to our fleet to expand into the neighboring Baringo border regions. To understand the global challenges of rural medical logistics, we encourage you to read the <a href="https://www.who.int/news-room/fact-sheets/detail/primary-health-care" target="_blank" class="text-[#ED1C24] font-bold hover:text-[#009CA6] transition-colors underline decoration-2 underline-offset-4">WHO Fact Sheet on Primary Health Care</a>. Your support keeps our engines running and our medicine chests full.</p>
+        </div>
+        <div class="side-links">
+            <a href="https://amref.org/kenya/" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">AMREF Health Africa: Kenya Initiatives</a>
+            <a href="https://www.doctorswithoutborders.org/what-we-do/medical-issues" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">MSF: Challenges in Rural Outreach</a>
+        </div>
+    </div>
+
+    <div id="data-maternal-care">
+        <img src="https://images.unsplash.com/photo-1531050171669-0101230e52f6?q=80&w=1200" class="w-full h-[400px] md:h-[500px] object-cover rounded-[2rem] mb-12 shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
+        <h1 class="text-4xl md:text-6xl mb-10 font-bold text-black leading-[1.1] tracking-tighter">Maternal Survival in Samburu North</h1>
+        <div class="space-y-8 text-lg md:text-xl text-black opacity-80 font-light leading-relaxed">
+            <p>In Samburu North, the ritual of birth is often shadowed by the risk of maternal mortality. High rates of home births without skilled attendants have historically led to preventable complications during delivery. Our foundation’s Maternal Health Program works directly with traditional birth attendants (TBAs) to integrate modern safety protocols without disrespecting cultural heritage.</p>
+            <p>We provide portable ultrasound screenings—a technology that was once unheard of in these nomadic regions. By identifying high-risk pregnancies, such as placenta previa or breech positioning, weeks in advance, we can arrange for safe transport to the Maralal County Referral Hospital long before a crisis occurs, effectively saving two lives at once.</p>
+            <p>Nutritional intervention is another key pillar. Anemia remains a leading cause of maternal hemorrhage in the environs of Laikipia. We provide iron supplements and fortified flour to expectant mothers, ensuring they have the physiological strength to endure childbirth. Our "Mama Kits"—containing sterile supplies for delivery—have become a highly valued resource among local women.</p>
+            <p>Post-natal care is often the most critical window. Many newborn deaths occur within the first 48 hours of life. Our community nurses conduct follow-up visits on motorcycles, reaching mothers who have returned to their bomas (homesteads) to ensure that breastfeeding is established and that no signs of neonatal sepsis are present.</p>
+            <p>The success of this program is measured in the smiles of healthy toddlers. Since our intervention began, we have seen a 35% increase in facility-based deliveries among our partner communities. This shift is not just about medicine; it is about building a system where every mother feels safe, respected, and empowered during the most vulnerable time of her life.</p>
+            <p>Our goal is to build a dedicated maternal wing in our base clinic by 2027. To learn more about the global fight for maternal survival, explore the <a href="https://www.unicef.org/health/maternal-newborn-and-child-health" target="_blank" class="text-[#ED1C24] font-bold hover:text-[#009CA6] transition-colors underline decoration-2 underline-offset-4">UNICEF Maternal Health Report</a>. Your partnership ensures that no mother in Samburu has to choose between her tradition and her life.</p>
+        </div>
+        <div class="side-links">
+            <a href="https://www.thelancet.com/journals/langlo/home" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">The Lancet: Global Maternal Trends</a>
+            <a href="https://www.white-ribbon-alliance.org/" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">White Ribbon Alliance for Safe Motherhood</a>
+        </div>
+    </div>
+
+    <div id="data-chronic-care">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200" class="w-full h-[400px] md:h-[500px] object-cover rounded-[2rem] mb-12 shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
+        <h1 class="text-4xl md:text-6xl mb-10 font-bold text-black leading-[1.1] tracking-tighter">NCD Management: A Clinical Strategy for Hypertension</h1>
+        <div class="space-y-8 text-lg md:text-xl text-black opacity-80 font-light leading-relaxed">
+            <p>Non-Communicable Diseases (NCDs), specifically hypertension and Type 2 diabetes, have emerged as the leading cause of adult morbidity in rural Laikipia. Historically, medical resources were funnelled toward infectious diseases, leaving a clinical vacuum for long-term physiological care. Our foundation’s NCD strategy is built on a "Continuum of Care" model that moves beyond sporadic screenings into a disciplined, evidence-based management protocol.</p>
+            <p>We have established community-based clinical hubs that utilize standardized WHO-HEARTS protocols for cardiovascular risk management. By decentralizing blood pressure monitoring to trained Community Health Assistants, we have reduced the rate of undiagnosed Stage 2 hypertension by 45% within our target demographics. This proactive identification is vital to preventing the surge of stroke and renal failure cases that overwhelm regional referral hospitals.</p>
+            <p>Pharmaceutical consistency is the backbone of our wellness program. In many rural dispensaries, stockouts of essential antihypertensive drugs like Amlodipine or Enalapril are common. Our medical foundation maintains an independent supply chain to ensure that once a patient is titrated onto a medication regimen, they never face the physiological danger of a sudden cessation of treatment due to logistics failures.</p>
+            <p>We integrate laboratory diagnostics directly into our field outreach. By utilizing point-of-care HbA1c testing and lipid profiling, our clinicians can make immediate, data-backed adjustments to treatment plans. This "real-time" clinical intervention is a significant upgrade from traditional models where patients would wait weeks for laboratory results from urban centers, often losing contact with the provider in the interim.</p>
+            <p>Education is framed as a clinical necessity rather than a suggestion. We conduct intensive patient seminars on dietary sodium reduction and the metabolic benefits of locally available high-fiber grains. By empowering patients with the biological understanding of their condition, we achieve higher rates of treatment adherence and a significant reduction in long-term hospitalization costs for families.</p>
+            <p>Looking forward, we are digitizing our patient records to allow for longitudinal tracking of health outcomes. This data is shared with the Ministry of Health to advocate for better NCD resource allocation in rural counties. To explore the latest clinical guidelines on hypertension management in low-resource settings, visit the <a href="https://www.who.int/news-room/fact-sheets/detail/hypertension" target="_blank" class="text-[#ED1C24] font-bold hover:text-[#009CA6] transition-colors underline decoration-2 underline-offset-4">World Health Organization</a>.</p>
+        </div>
+        <div class="side-links">
+            <a href="https://www.worldheart-federation.org/" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">World Heart Federation: Global NCD Trends</a>
+            <a href="https://www.thelancet.com/ncds" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">The Lancet: Diabetes in Sub-Saharan Africa</a>
+        </div>
+    </div>
+
+    <div id="data-surgical-outreach">
+        <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1200" class="w-full h-[400px] md:h-[500px] object-cover rounded-[2rem] mb-12 shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
+        <h1 class="text-4xl md:text-6xl mb-10 font-bold text-black leading-[1.1] tracking-tighter">Restoring Vision: The Impact of Surgical Outreach</h1>
+        <div class="space-y-8 text-lg md:text-xl text-black opacity-80 font-light leading-relaxed">
+            <p>In the arid regions of Isiolo and Samburu, prolonged exposure to UV radiation and airborne dust leads to some of the highest rates of preventable blindness in the country. Cataracts and trachoma are the primary culprits, often turning productive elders into dependents and placing immense strain on family resources. Our surgical outreach program is dedicated to reversing this trend through high-volume, high-quality eye camps.</p>
+            <p>Each outreach mission involves a specialized team of ophthalmologists and ophthalmic nurses who convert local dispensaries into sterile operating theaters. By utilizing modern Small Incision Cataract Surgery (SICS) techniques, we can perform dozens of life-altering procedures in a single weekend. The results are immediate; a patient who arrived blind often leaves with functional vision within 24 hours.</p>
+            <p>Screening is conducted weeks in advance by our Community Health Volunteers. They travel to the most remote bomas to identify candidates who have completely lost their sight. By prioritizing those with bilateral blindness, we focus our resources on patients for whom surgery will have the most profound economic and social impact, restoring their ability to care for themselves and their livestock.</p>
+            <p>Post-operative care is handled by local clinical teams we have trained in basic ophthalmic hygiene. We provide every surgical patient with protective eyewear and antibiotic drops to ensure zero infection rates post-surgery. This follow-up care is essential in rugged environments where dust and smoke from cooking fires pose a constant threat to a healing eye.</p>
+            <p>Sustainability is achieved through our "Training the Trainers" initiative. We are currently sponsoring two local nurses for specialized ophthalmic training at the Kenya Medical Training College. Our goal is to ensure that the capacity for eye care remains in these counties long after our surgical teams have moved on to the next location, creating a permanent solution to preventable blindness.</p>
+            <p>The cost of a single cataract surgery is relatively low, but the return on investment for a human life is immeasurable. To see the global data on eye health and blindness prevention, visit the <a href="https://www.iapb.org/" target="_blank" class="text-[#ED1C24] font-bold hover:text-[#009CA6] transition-colors underline decoration-2 underline-offset-4">International Agency for the Prevention of Blindness</a>. Your support allows us to purchase the intraocular lenses that restore sight to the forgotten corners of Kenya.</p>
+        </div>
+        <div class="side-links">
+            <a href="https://www.fredhollows.org/" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">The Fred Hollows Foundation: Global Eye Care</a>
+            <a href="https://www.iapb.org/vision-2020/" target="_blank" class="block p-5 bg-black/[0.03] rounded-xl hover:bg-[#009CA6] hover:text-white transition-all font-semibold text-sm text-black border border-black/5 hover:border-[#009CA6]">Vision 2020: The Right to Sight</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function kcRead(id) {
+        const overlay = document.getElementById('kc-reader-overlay');
+        const contentTarget = document.getElementById('kc-article-inject');
+        const sidebarTarget = document.getElementById('kc-sidebar-links');
+        const data = document.getElementById('data-' + id);
+
+        if (data) {
+            // Clone article content
+            const articleContent = data.cloneNode(true);
+            const sideLinks = articleContent.querySelector('.side-links');
+            
+            // Separate side links from main text
+            if (sideLinks) {
+                sidebarTarget.innerHTML = sideLinks.innerHTML;
+                sideLinks.remove();
+            }
+
+            contentTarget.innerHTML = articleContent.innerHTML;
+            overlay.style.display = 'block';
+            document.body.classList.add('overflow-hidden'); // Standard tailwind class
+            overlay.scrollTop = 0;
+        }
+    }
+
+    function kcClose() {
+        document.getElementById('kc-reader-overlay').style.display = 'none';
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    // Escape to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') kcClose();
+    });
+</script>
+<section class="bg-white py-20 overflow-hidden border-b border-slate-100">
+    <div class="container mx-auto px-6 mb-12">
+        <div class="text-center">
+            <h2 class="text-slate-900 text-3xl md:text-4xl font-black uppercase tracking-tight">
+                Our Trusted <span class="text-[#009CA6]">Partners</span>
+            </h2>
+            <div class="w-16 h-1 bg-[#ED1C24] mx-auto mt-4"></div>
+        </div>
+    </div>
+
+    <div class="relative flex overflow-x-hidden">
+        <div class="flex animate-marquee whitespace-nowrap py-4 items-center w-max">
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://equityafya.co.ke/images/equity_logo.png" alt="Equity Afya">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://pbs.twimg.com/profile_images/1258804515958071297/rLE_OdMn_400x400.jpg" alt="Partner 2">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGiIsG148NZ-CpuV74fgBPp6F8U4CMgNfGzg&s" alt="Partner 3">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Mclv2rnhpKquSVvJ3EX5wsVXAX6S72UWsA&s" alt="Partner 4">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHfUss5gEUL0sIvGRPcv7jspLkl3-FB0E8nw&s" alt="Partner 5">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkksOYrAexlmvR9V6OlTnzdrAVkAPB60P61w&s" alt="Partner 6">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://media.licdn.com/dms/image/v2/D4D22AQEB6jE6gTluDQ/feedshare-shrink_800/B4DZcL1cWgGcAk-/0/1748250249607?e=2147483647&v=beta&t=_vZuFE5ZvCsZJ6kkXunJQzrYMSi9vRq_G3amT-oxOB0" alt="Partner 7">
+            </div>
+        </div>
+
+        <div class="absolute top-0 flex animate-marquee2 whitespace-nowrap py-4 items-center w-max">
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://equityafya.co.ke/images/equity_logo.png" alt="Equity Afya">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://pbs.twimg.com/profile_images/1258804515958071297/rLE_OdMn_400x400.jpg" alt="Partner 2">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGiIsG148NZ-CpuV74fgBPp6F8U4CMgNfGzg&s" alt="Partner 3">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-Mclv2rnhpKquSVvJ3EX5wsVXAX6S72UWsA&s" alt="Partner 4">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHfUss5gEUL0sIvGRPcv7jspLkl3-FB0E8nw&s" alt="Partner 5">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkksOYrAexlmvR9V6OlTnzdrAVkAPB60P61w&s" alt="Partner 6">
+            </div>
+            <div class="flex justify-center items-center w-32 md:w-48 mx-4 md:mx-8 shrink-0">
+                <img class="h-10 md:h-14 w-auto object-contain transition duration-500 hover:scale-110" src="https://media.licdn.com/dms/image/v2/D4D22AQEB6jE6gTluDQ/feedshare-shrink_800/B4DZcL1cWgGcAk-/0/1748250249607?e=2147483647&v=beta&t=_vZuFE5ZvCsZJ6kkXunJQzrYMSi9vRq_G3amT-oxOB0" alt="Partner 7">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const textSlides = document.querySelectorAll('.text-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function goToSlide(n) {
+            // Clean up current active states
+            slides[currentSlide].classList.replace('opacity-100', 'opacity-0');
+            slides[currentSlide].classList.add('scale-110');
+            
+            textSlides[currentSlide].classList.remove('text-slide-active');
+            dots[currentSlide].classList.replace('bg-white', 'bg-white/30');
+
+            // Set new index
+            currentSlide = (n + slides.length) % slides.length;
+
+            // Activate new slide states
+            slides[currentSlide].classList.replace('opacity-0', 'opacity-100');
+            slides[currentSlide].classList.remove('scale-110');
+            
+            textSlides[currentSlide].classList.add('text-slide-active');
+            dots[currentSlide].classList.replace('bg-white/30', 'bg-white');
+        }
+
+        // Auto transition every 5 seconds
+        setInterval(() => goToSlide(currentSlide + 1), 5000);
+    </script>
+<section id="impact-signature" class="py-24 md:py-32 bg-white relative overflow-hidden">
+    <div class="absolute top-10 left-[-5%] text-[35rem] md:text-[45rem] font-delight font-black text-slate-50 leading-none select-none -z-10 pointer-events-none opacity-60 hidden md:block">K</div>
+
+    <div class="container mx-auto px-6 md:px-16">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+        <div class="antialiased font-['Poppins'] bg-white">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-24 md:mb-32 items-end">
+                    <div class="lg:col-span-7 text-center lg:text-left">
+                        <div class="flex items-center justify-center lg:justify-start gap-4 mb-6">
+                            <span class="text-[#ED1C24] font-black text-[10px] md:text-xs uppercase tracking-[0.5em]">Program Impact</span>
+                            <div class="h-px w-12 md:w-24 bg-[#009CA6]"></div>
+                        </div>
+                        <h2 class="font-extrabold text-5xl md:text-7xl text-black leading-[1.1] mb-0 tracking-tighter">
+                            The weight<br>
+                            <span class="text-[#009CA6]">of our work.</span>
+                        </h2>
+                    </div>
+                    
+                    <div class="lg:col-span-5">
+                        <p class="text-black opacity-80 text-base md:text-lg font-light leading-relaxed border-t-4 lg:border-t-0 lg:border-l-4 border-black pt-8 lg:pt-2 lg:pb-2 lg:pl-8 text-center lg:text-left max-w-md mx-auto lg:mx-0">
+                            Every figure represents a life reached, a family secured, and a community empowered in the heart of Kenya.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex overflow-x-auto lg:justify-center md:grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-20 pb-8 md:pb-0 snap-x snap-mandatory custom-scrollbar">
+                    
+                    <div class="min-w-[72vw] md:min-w-0 group relative pt-10 cursor-default snap-center ml-4 md:ml-0">
+                        <div class="absolute top-0 left-0 text-black/[0.04] font-black italic text-8xl -z-10 transition-all duration-700 group-hover:-translate-y-4 group-hover:text-[#009CA6]/10">01</div>
+                        <div class="flex items-baseline mb-2 transition-colors duration-500">
+                            <span class="text-5xl md:text-6xl font-black text-black group-hover:text-[#009CA6] transition-colors counter" data-target="15">0</span>
+                            <span class="text-4xl md:text-5xl font-black text-[#ED1C24]">k+</span>
+                        </div>
+                        <div class="h-1 w-0 bg-[#009CA6] mb-6 transition-all duration-500 group-hover:w-24"></div>
+                        <h3 class="font-bold text-[11px] text-black uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="w-2 h-2 bg-[#ED1C24] rounded-full animate-pulse"></span> Patients Reached
+                        </h3>
+                        <p class="text-black opacity-70 text-sm font-light leading-relaxed max-w-[240px]">
+                            Comprehensive care and specialized screenings across Laikipia.
+                        </p>
+                    </div>
+
+                    <div class="min-w-[72vw] md:min-w-0 group relative pt-10 cursor-default snap-center">
+                        <div class="absolute top-0 left-0 text-black/[0.04] font-black italic text-8xl -z-10 transition-all duration-700 group-hover:-translate-y-4 group-hover:text-[#ED1C24]/10">02</div>
+                        <div class="flex items-baseline mb-2 transition-colors duration-500">
+                            <span class="text-5xl md:text-6xl font-black text-black group-hover:text-[#ED1C24] transition-colors counter" data-target="84">0</span>
+                        </div>
+                        <div class="h-1 w-0 bg-[#ED1C24] mb-6 transition-all duration-500 group-hover:w-24"></div>
+                        <h3 class="font-bold text-[11px] text-black uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="w-2 h-2 bg-[#009CA6] rounded-full animate-pulse"></span> Villages Served
+                        </h3>
+                        <p class="text-black opacity-70 text-sm font-light leading-relaxed max-w-[240px]">
+                            Extending our medical network to the most remote settlements.
+                        </p>
+                    </div>
+
+                    <div class="min-w-[72vw] md:min-w-0 group relative pt-10 cursor-default snap-center">
+                        <div class="absolute top-0 left-0 text-black/[0.04] font-black italic text-8xl -z-10 transition-all duration-700 group-hover:-translate-y-4 group-hover:text-[#009CA6]/10">03</div>
+                        <div class="flex items-baseline mb-2 transition-colors duration-500">
+                            <span class="text-5xl md:text-6xl font-black text-black group-hover:text-[#009CA6] transition-colors counter" data-target="582">0</span>
+                        </div>
+                        <div class="h-1 w-0 bg-[#009CA6] mb-6 transition-all duration-500 group-hover:w-24"></div>
+                        <h3 class="font-bold text-[11px] text-black uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="w-2 h-2 bg-[#ED1C24] rounded-full animate-pulse"></span> Health Promoters
+                        </h3>
+                        <p class="text-black opacity-70 text-sm font-light leading-relaxed max-w-[240px]">
+                            Community volunteers leading grassroots health education.
+                        </p>
+                    </div>
+
+                    <div class="min-w-[72vw] md:min-w-0 group relative pt-10 cursor-default snap-center pr-4 md:pr-0">
+                        <div class="absolute top-0 left-0 text-black/[0.04] font-black italic text-8xl -z-10 transition-all duration-700 group-hover:-translate-y-4 group-hover:text-[#ED1C24]/10">04</div>
+                        <div class="flex items-baseline mb-2 transition-colors duration-500">
+                            <span class="text-5xl md:text-6xl font-black text-black group-hover:text-[#ED1C24] transition-colors counter" data-target="100">0</span>
+                            <span class="text-3xl font-black text-[#ED1C24] ml-1">%</span>
+                        </div>
+                        <div class="h-1 w-0 bg-[#ED1C24] mb-6 transition-all duration-500 group-hover:w-24"></div>
+                        <h3 class="font-bold text-[11px] text-black uppercase tracking-[0.2em] mb-4 flex items-center gap-3">
+                            <span class="w-2 h-2 bg-[#009CA6] rounded-full animate-pulse"></span> Fund Integrity
+                        </h3>
+                        <p class="text-black opacity-70 text-sm font-light leading-relaxed max-w-[240px]">
+                            Ensuring every donor shilling goes directly to clinical care.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-2 mt-6 mb-12 md:hidden">
+                    <div class="w-8 h-1 bg-[#009CA6] rounded-full"></div>
+                    <div class="w-2 h-1 bg-slate-200 rounded-full"></div>
+                    <div class="w-2 h-1 bg-slate-200 rounded-full"></div>
+                    <div class="w-2 h-1 bg-slate-200 rounded-full"></div>
+                </div>
+
+                <div class="mt-12 md:mt-32 bg-black rounded-[2rem] md:rounded-[3rem] p-10 md:p-16 relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-[#009CA6] opacity-20 blur-[100px] -translate-y-1/2 translate-x-1/3 transition-all duration-1000 group-hover:opacity-40 group-hover:scale-110"></div>
+                    <div class="max-w-4xl relative z-10">
+                        <div class="w-12 h-1.5 bg-[#ED1C24] mb-8 transition-all duration-700 group-hover:w-24"></div>
+                        <p class="font-extrabold text-3xl md:text-5xl text-white leading-[1.3] tracking-tight">
+                            "Kwetu Care Foundation doesn’t just treat symptoms. <br class="hidden md:block">
+                            <span class="text-[#009CA6]">We build systems of care that last.</span>"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const counters = document.querySelectorAll('.counter');
+            const speed = 100;
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                const observer = new IntersectionObserver((entries) => {
+                    if(entries[0].isIntersecting) {
+                        updateCount();
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.5 });
+                observer.observe(counter);
+            });
+        </script>
+    </div>
+</section>
+
+<style>
+    /* Custom Scrollbar for Mobile Visibility */
+    @media (max-width: 768px) {
+        .custom-scrollbar::-webkit-scrollbar {
+            display: block;
+            height: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    }
+    
+    /* Hide scrollbar on desktop */
+    @media (min-width: 769px) {
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    }
+
+    .counter {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+    }
+</style>
+<section id="member-profiles" class="py-16 md:py-24 bg-slate-50 font-['Poppins'] overflow-hidden">
+    <div class="container mx-auto px-8 md:px-12 lg:px-16 max-w-7xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            
+            <div class="space-y-6 text-center lg:text-left">
+                <div class="mb-6 lg:mb-8 flex justify-center lg:justify-start">
+                    <svg width="80" height="50" viewBox="0 0 84 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 35C15 15 25 50 40 25C50 10 65 20 75 10" stroke="#009CA6" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M72 8L80 12L74 20" fill="#ED1C24"/>
+                        <circle cx="80" cy="12" r="4" fill="#ED1C24"/>
+                    </svg>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+                    What Our <br class="hidden lg:block"/>
+                    <span class="text-[#009CA6]">Team Members Say</span>
+                </h2>
+                
+                <p class="text-slate-500 text-lg md:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed font-light">
+                    Compassionate care is more than a profession—it's a calling. Meet the hearts behind Kwetu Care Foundation.
+                </p>
+
+                <div class="pt-4">
+                    <a href="#team" class="inline-block">
+                        <button class="bg-gradient-to-r from-[#ED1C24] to-[#009CA6] text-white px-10 py-4 rounded-xl font-medium shadow-lg hover:opacity-90 hover:scale-105 transition-all duration-300">
+                            View More
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative h-[500px] md:h-[600px] flex items-center justify-center lg:justify-end">
+                <div class="testimonial-container relative w-full max-w-md h-full">
+                    
+                    <div class="testimonial-card t-card-1">
+                        <div class="focus-bar"></div>
+                        <div class="card-body">
+                            <div class="avatar bg-[#009CA6]/10 text-[#009CA6]">EG</div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-slate-800 text-base">Edwin Gitonga Njiru</h3>
+                                <p class="text-slate-400 text-sm italic line-clamp-2">"Health is wealth. Empathy is the core of our care."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card t-card-2">
+                        <div class="focus-bar"></div>
+                        <div class="card-body">
+                            <div class="avatar bg-[#ED1C24]/10 text-[#ED1C24]">YM</div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-slate-800 text-base">Yvonne S Muthumbi</h3>
+                                <p class="text-slate-400 text-sm italic line-clamp-2">"No one should suffer in silence or lose their spark."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card t-card-3">
+                        <div class="focus-bar"></div>
+                        <div class="card-body">
+                            <div class="avatar bg-[#009CA6]/10 text-[#009CA6]">AN</div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-slate-800 text-base">Allan Munene Ndwiga</h3>
+                                <p class="text-slate-400 text-sm italic line-clamp-2">"Community driven solutions can change lives."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card t-card-4">
+                        <div class="focus-bar"></div>
+                        <div class="card-body">
+                            <div class="avatar bg-[#ED1C24]/10 text-[#ED1C24]">EK</div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-bold text-slate-800 text-base">Elizabeth Mbenge</h3>
+                                <p class="text-slate-400 text-sm italic line-clamp-2">"We work to preserve life in every form."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .testimonial-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-body {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        width: 100%;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    }
+
+    .avatar {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        flex-shrink: 0;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .testimonial-card {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        opacity: 0;
+        animation: floatLoop 16s infinite linear;
+    }
+
+    .focus-bar {
+        width: 5px;
+        height: 50px;
+        background: #009CA6;
+        border-radius: 10px;
+        margin-right: 15px;
+        opacity: 0;
+    }
+
+    @keyframes floatLoop {
+        0% { transform: translateY(200px) scale(0.85); opacity: 0; }
+        5% { opacity: 0.3; }
+        15%, 25% { transform: translateY(120px) scale(0.9); opacity: 0.5; z-index: 10; }
+        35%, 45% { transform: translateY(0) scale(1.05); opacity: 1; z-index: 40; }
+        55%, 65% { transform: translateY(-120px) scale(0.9); opacity: 0.5; z-index: 10; }
+        75% { opacity: 0; }
+        100% { transform: translateY(-200px) scale(0.8); opacity: 0; }
+    }
+
+    /* Staggered starts */
+    .t-card-1 { animation-delay: 0s; }
+    .t-card-2 { animation-delay: 4s; }
+    .t-card-3 { animation-delay: 8s; }
+    .t-card-4 { animation-delay: 12s; }
+
+    @keyframes barFade {
+        0%, 34%, 46%, 100% { opacity: 0; }
+        35%, 45% { opacity: 1; }
+    }
+    .focus-bar { animation: barFade 16s infinite linear; }
+    .t-card-1 .focus-bar { animation-delay: 0s; }
+    .t-card-2 .focus-bar { animation-delay: 4s; }
+    .t-card-3 .focus-bar { animation-delay: 8s; }
+    .t-card-4 .focus-bar { animation-delay: 12s; }
+
+    .testimonial-container:hover .testimonial-card,
+    .testimonial-container:hover .focus-bar {
+        animation-play-state: paused;
+    }
+</style>
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100;
+
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) {
+                    updateCount();
+                    observer.disconnect();
+                }
+            });
+            observer.observe(counter);
+        });
+    </script>
+</div>
+</section>
+
+<style>
+    .counter {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+    }
+    /* Smooth transitions for the numbers */
+    .group:hover .counter {
+        color: #ef4444; /* medical-red roughly */
+        transition: color 0.3s ease;
+    }
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+<div class="antialiased font-['Poppins']">
+
+    <section id="contact" class="py-20 bg-black/[0.03]">
+        <div class="max-w-6xl mx-auto bg-white rounded-[40px] shadow-[0_10px_40px_rgba(0,0,0,0.05)] p-12 md:p-20">
+            
+            <div class="mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-black mb-4 tracking-tight">Get in touch with us</h2>
+                <p class="text-black opacity-60 max-w-md font-light leading-relaxed">
+                    Thanks for stopping by! Whether you have a question, comment, or just want to say hi, don't be a stranger. We're here to help, and we love connecting with our community.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-8">
+                    <div>
+                        <h2 class="font-extrabold text-lg mb-2 text-black">Visit us</h2>
+                        <p class="text-sm text-black opacity-60 font-light mb-2">Come say hello at our office</p>
+                        <p class="font-bold text-black leading-tight">Laikipia County,<br>Kenya</p>
+                    </div>
+
+                    <div>
+                        <h2 class="font-extrabold text-lg mb-2 text-black">Call us</h2>
+                        <p class="text-sm text-black opacity-60 font-light mb-2">Mon-Fri 9am-5pm</p>
+                        <p class="font-bold text-black">+254 (0) XXX XXX XXX</p>
+                    </div>
+<div>
+                        <h2 class="font-extrabold text-lg mb-2 text-black">Chat to us</h2>
+                        <p class="text-sm text-black opacity-60 font-light mb-2">Our friendly team is here to help</p>
+                        <a href="mailto:info@kwetucare.org" class="font-bold text-[#009CA6] hover:text-[#ED1C24] transition-colors">kwetucarefoundation@hotmail.com</a>
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-lg mb-2 text-black">Hours</h2>
+                        <p class="text-sm text-black opacity-60 font-light mb-2">Monday-Friday 9am-5pm</p>
+                    </div>
+                </div>
+
+                <div class="bg-[#009CA6]/10 p-8 md:p-10 rounded-[30px]">
+                    <form action="#" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="Name*" class="w-full p-4 rounded-xl border-none bg-white placeholder-black/40 text-black font-light focus:ring-2 focus:ring-[#009CA6] outline-none transition-shadow">
+                            <input type="text" placeholder="Last name*" class="w-full p-4 rounded-xl border-none bg-white placeholder-black/40 text-black font-light focus:ring-2 focus:ring-[#009CA6] outline-none transition-shadow">
+                        </div>
+                        <input type="email" placeholder="Email*" class="w-full p-4 rounded-xl border-none bg-white placeholder-black/40 text-black font-light focus:ring-2 focus:ring-[#009CA6] outline-none transition-shadow">
+                        <textarea placeholder="Your message*" rows="5" class="w-full p-4 rounded-xl border-none bg-white placeholder-black/40 text-black font-light focus:ring-2 focus:ring-[#009CA6] outline-none resize-none transition-shadow"></textarea>
+                        
+                        <div class="pt-2">
+                            <button type="submit" class="bg-[#009CA6] hover:bg-black text-white px-10 py-3 rounded-full font-bold transition-colors duration-300">
+                                Send message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white pt-24 pb-12 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-[#ED1C24] opacity-10 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#009CA6] opacity-10 blur-[120px]"></div>
+
+        <div class="container mx-auto px-6 md:px-16 relative z-10">
+            
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16 border-b border-white/10 pb-12">
+                <div class="max-w-2xl">
+                    <div class="flex items-center gap-4 mb-6 w-max">
+    <div class="flex flex-col justify-center min-w-[180px]">
+        
+        <span class="text-3xl md:text-3xl font-black tracking-tighter uppercase text-white leading-none mb-2">
+            KWETU CARE
+        </span>
+        
+        <div class="flex items-center w-full gap-2">
+            <div class="h-[2px] flex-grow bg-[#ED1C24]"></div>
+            <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] text-[#ED1C24] uppercase leading-none">
+                Foundation
+            </span>
+            <div class="h-[2px] flex-grow bg-[#ED1C24]"></div>
+        </div>
+        
+    </div>
+</div>
+                    <p class="text-white opacity-50 font-light text-sm leading-relaxed mb-4">
+                        Kwetu Care Foundation is a community-based organization working to bridge healthcare gaps in rural and underserved areas of Kenya, within Laikipia County and neighbouring communities.
+                    </p>
+                    <p class="text-white opacity-50 font-light text-sm leading-relaxed">
+                        Founded on the belief that healthcare should be accessible, dignified, and community-centered, we bring care closer to the people who need it most. Our approach combines direct medical intervention with long-term community empowerment, ensuring health is a lasting legacy.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-6 mt-4 lg:mt-0">
+                    <div class="flex gap-3">
+                        <a href="https://facebook.com/kwetucare" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-[#009CA6] hover:text-white text-white/50 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="https://twitter.com/kwetucare" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-[#009CA6] hover:text-white text-white/50 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                        </a>
+                        <a href="https://instagram.com/kwetucare" target="_blank" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-[#009CA6] hover:text-white text-white/50 transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                    </div>
+                    
+                    <button onclick="toggleDonate()" class="group relative px-8 py-3 border border-[#ED1C24] overflow-hidden transition-all duration-300">
+                        <span class="absolute inset-0 bg-[#ED1C24] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center z-0"></span>
+                        <span class="relative z-10 text-white font-bold text-[11px] uppercase tracking-[0.2em]">Donate Now</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <h4 class="text-white font-bold mb-8 text-xs uppercase tracking-[0.2em]">About Us</h4>
+                    <ul class="space-y-4 text-sm text-white/50 font-light">
+                        <li><a href="#about" class="hover:text-white transition-all flex items-center gap-2 group">Who We Are <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                        <li><a href="#founders-section" class="hover:text-white transition-all flex items-center gap-2 group">Our Founders <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                        <li><a href="#exist" class="hover:text-white transition-all flex items-center gap-2 group">Why We Exist <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                        <li><a href="#team" class="hover:text-white transition-all flex items-center gap-2 group">The Team <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-8 text-xs uppercase tracking-[0.2em]">Our Programs</h4>
+                    <ul class="space-y-4 text-sm text-white/50 font-light">
+                        <li><a href="#programs" class="hover:text-white transition-all flex items-center gap-2 group">Medical Camps <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                        <li><a href="#programs" class="hover:text-white transition-all flex items-center gap-2 group">Maternal Care <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                        <li><a href="#programs" class="hover:text-white transition-all flex items-center gap-2 group">Health Education <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                        <li><a href="#contact" class="hover:text-white transition-all flex items-center gap-2 group">Volunteer <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-8 text-xs uppercase tracking-[0.2em]">Insights</h4>
+                    <ul class="space-y-4 text-sm text-white/50 font-light">
+                        <li>
+                            <button onclick="openCause('preventable-deaths')" class="hover:text-white transition-all flex items-center gap-2 group text-left">
+                                Latest Stories 
+                                <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </button>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.who.int/news-room/questions-and-answers" target="_blank" class="hover:text-white transition-all flex items-center gap-2 group">
+                                WHO 
+                                <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://cof.org/sites/default/files/Kenya%20Country%20Note%20June%202021%20final%5B8293%5D.pdf" target="_blank" class="hover:text-white transition-all flex items-center gap-2 group">
+                                Terms & Conditions 
+                                <svg class="opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#009CA6]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-8 text-xs uppercase tracking-[0.2em]">Contact</h4>
+                    <div class="space-y-4 text-white/50 font-light text-sm">
+                        <p class="flex items-center gap-3"><span class="text-[#ED1C24] text-lg">📍</span> Laikipia County, KE</p>
+                        <p class="flex items-center gap-3">
+                            <span class="text-[#ED1C24] text-lg">✉️</span> 
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@kwetucare.org" target="_blank" class="hover:text-[#009CA6] transition-colors">
+                                info@kwetucare.org
+                            </a>
+                        </p>
+                        <p class="flex items-center gap-3">
+                            <span class="text-[#ED1C24] text-lg">📞</span> 
+                            <a href="tel:+254758760619" class="hover:text-[#009CA6] transition-colors">
+                                +254 758 760 619
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-white/30 text-[11px] font-bold tracking-[0.1em] uppercase">
+                    © 2026 KWETU CARE FOUNDATION. ALL RIGHTS RESERVED.
+                </p>
+                
+                <div class="group cursor-default flex items-center gap-2">
+                    <span class="text-white/30 text-[9px] tracking-[0.4em] uppercase font-bold">Designed by</span>
+                    <a href="https://kenflixdesigns.co.ke" target="_blank" class="relative text-white/70 hover:text-white transition-colors font-black text-[11px] tracking-tighter">
+                        KENFLIX<span class="text-[#ED1C24]">DESIGNS</span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#ED1C24] group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</footer>
+<script>
+    const articleData = {
+        wellness: {
+            title: "Empowering Wellness: Chronic Illness Support",
+            image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200",
+            tag: "Kenya",
+            content: `<p class='text-xl leading-relaxed mb-6'>We provide diagnostic and long-term medication support for chronic conditions across Laikipia.</p>`
+        },
+        clinics: {
+            title: "Mobile Clinics: Hope to Remote Villages",
+            image: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1200",
+            tag: "Healthcare Outreach",
+            content: `<p class='text-xl leading-relaxed'>Our mobile units bridge the gap between rural homes and quality medical attention.</p>`
+        }
+        // Add other cases as needed...
+    };
+
+    function openArticle(key) {
+        const data = articleData[key] || articleData['wellness'];
+        document.getElementById('modalContent').innerHTML = `
+            <header class="relative h-[60vh]">
+                <img src="${data.image}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-12">
+                    <div class="container mx-auto"><h1 class="text-white text-5xl font-serif">${data.title}</h1></div>
+                </div>
+            </header>
+            <div class="container mx-auto py-20 px-6 max-w-3xl prose prose-lg">${data.content}</div>`;
+        document.getElementById('articleModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeArticle() {
+        document.getElementById('articleModal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+</script>
+    <script>
+      function hideGiftPrompt() {
+  const prompt = document.getElementById('timed-gift-prompt');
+  
+  if (prompt) {
+    // 1. Trigger the transition (fade out and move down)
+    prompt.classList.remove('opacity-100', 'translate-y-0');
+    prompt.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+    
+    // 2. Fully remove from layout after the 1000ms transition finishes
+    setTimeout(() => {
+      prompt.classList.add('hidden');
+    }, 1000); 
+  }
+}
+        // --- DONATION MODAL LOGIC ---
+
+// 1. Open/Close Modal
+function toggleDonate() {
+    const modal = document.getElementById('donate-modal');
+    modal.classList.toggle('hidden');
+    modal.classList.toggle('flex');
+    
+    // Lock/Unlock body scroll
+    document.body.style.overflow = modal.classList.contains('flex') ? 'hidden' : 'auto';
+}
+
+// 2. Switch between M-Pesa and Bank View
+function switchMethod(method) {
+    const mpesaBtn = document.getElementById('tab-mpesa');
+    const bankBtn = document.getElementById('tab-bank');
+    const mpesaView = document.getElementById('method-mpesa');
+    const bankView = document.getElementById('method-bank');
+
+    if (method === 'mpesa') {
+        // Highlight Mpesa Tab
+        mpesaBtn.classList.add('bg-white', 'shadow-sm', 'text-medical-red');
+        mpesaBtn.classList.remove('text-gray-500');
+        // Dim Bank Tab
+        bankBtn.classList.remove('bg-white', 'shadow-sm', 'text-medical-red');
+        bankBtn.classList.add('text-gray-500');
+        // Toggle Views
+        mpesaView.classList.remove('hidden');
+        bankView.classList.add('hidden');
+    } else {
+        // Highlight Bank Tab
+        bankBtn.classList.add('bg-white', 'shadow-sm', 'text-medical-red');
+        bankBtn.classList.remove('text-gray-500');
+        // Dim Mpesa Tab
+        mpesaBtn.classList.remove('bg-white', 'shadow-sm', 'text-medical-red');
+        mpesaBtn.classList.add('text-gray-500');
+        // Toggle Views
+        bankView.classList.remove('hidden');
+        mpesaView.classList.add('hidden');
+    }
+}
+
+// 3. Copy Text to Clipboard Function
+function copyToClipboard(elementId) {
+    const text = document.getElementById(elementId).innerText;
+    
+    // We capture the button that was clicked to provide feedback
+    const btn = event.currentTarget; 
+    
+    navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = "Copied!";
+        
+        // Add success styling
+        btn.classList.add('!bg-medical-red', '!text-white', '!border-medical-red');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.classList.remove('!bg-medical-red', '!text-white', '!border-medical-red');
+        }, 2000);
+    }).catch(err => {
+        console.error('Copy failed:', err);
+    });
+}
+
+// 4. Close Modal on Outside Click
+window.onclick = function(event) {
+    const modal = document.getElementById('donate-modal');
+    if (event.target == modal) { 
+        toggleDonate(); 
+    }
+}
+
+        // MOBILE MENU
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobLinks = document.querySelectorAll('.mob-link');
+
+        menuBtn.onclick = () => mobileNav.classList.add('active');
+        closeBtn.onclick = () => mobileNav.classList.remove('active');
+        
+        document.getElementById('mob-about-toggle').onclick = (e) => {
+            const menu = document.getElementById('mob-about-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        };
+
+        mobLinks.forEach(link => {
+            link.onclick = () => mobileNav.classList.remove('active');
+        });
+
+        document.querySelector('form').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Thank you for reaching out!');
+        };
+        function openCause(id) {
+    const overlay = document.getElementById('cause-overlay');
+    const contents = document.querySelectorAll('.cause-content');
+    
+    // Hide all contents first
+    contents.forEach(content => content.classList.add('hidden'));
+    
+    // Show the specific content requested
+    document.getElementById(id).classList.remove('hidden');
+    
+    // Show the main overlay
+    overlay.classList.remove('hidden');
+    
+    // Prevent body from scrolling behind the overlay
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCause() {
+    const overlay = document.getElementById('cause-overlay');
+    overlay.classList.add('hidden');
+    
+    // Re-enable body scroll
+    document.body.style.overflow = 'auto';
+} document.addEventListener('DOMContentLoaded', () => {
+  const mobileNav = document.getElementById('mobile-nav');
+  const navLinks = document.querySelectorAll('.mob-link, #mob-about-menu a');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      // Adds the 'hidden' class back to hide the menu
+      mobileNav.classList.add('hidden');
+    });
+  });
+});
+function toggleDonate() {
+    const modal = document.getElementById('donate-modal');
+    if (modal) {
+        // Toggle logic: if hidden, show it; if shown, hide it
+        if (modal.style.display === 'none' || modal.style.display === '') {
+            modal.style.display = 'flex'; // Use flex for centering if it's a modal
+            modal.style.zIndex = '1000000'; // Higher than the reader overlay (999999)
+        } else {
+            modal.style.display = 'none';
+        }
+    } else {
+        console.error("Element with ID 'donate-modal' was not found.");
+    }
+}
+    </script>
+    
+</body>
+</html>
