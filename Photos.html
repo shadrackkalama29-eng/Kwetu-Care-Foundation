@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos - Kwetu Gallery Portal</title>
+    <style>
+        :root {
+            --kwetu-teal: #009CA6;
+            --kwetu-red: #ED1C24;
+            --kwetu-black: #1a1a1a;
+            --kwetu-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--kwetu-white);
+            margin: 0;
+            padding: 0;
+            color: var(--kwetu-black);
+        }
+
+        /* Sticky Navigation Bar */
+        .kwetu-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-back-home {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--kwetu-teal);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back-home svg {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-back-home:hover {
+            color: var(--kwetu-red);
+        }
+
+        .btn-back-home:hover svg {
+            transform: translateX(-5px);
+        }
+
+        .kwetu-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px 80px 20px;
+            text-align: center;
+        }
+
+        /* Header Styling */
+        .kwetu-header-box {
+            margin-bottom: 50px;
+            border-bottom: 3px solid var(--kwetu-teal);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .kwetu-header-box p {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: var(--kwetu-teal);
+            margin-bottom: 5px;
+        }
+
+        .kwetu-header-box h2 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--kwetu-black);
+            text-transform: uppercase;
+        }
+
+        .kwetu-header-box h2 span {
+            color: var(--kwetu-red);
+        }
+
+        /* Gallery Grid Layout */
+        .kwetu-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .kwetu-item {
+            position: relative;
+            background: var(--kwetu-black);
+            border-radius: 4px;
+            overflow: hidden;
+            aspect-ratio: 3/2;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #eee;
+        }
+
+        .kwetu-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-color: var(--kwetu-teal);
+        }
+
+        .kwetu-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Instant Download Layer */
+        .kwetu-dl-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 156, 166, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .kwetu-item:hover .kwetu-dl-layer {
+            opacity: 1;
+        }
+
+        .kwetu-dl-btn {
+            background: var(--kwetu-white);
+            padding: 15px;
+            border-radius: 50%;
+            display: flex;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+
+        .kwetu-dl-btn:hover {
+            transform: scale(1.2);
+            background: var(--kwetu-red);
+        }
+
+        .kwetu-dl-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--kwetu-teal);
+        }
+
+        .kwetu-dl-btn:hover svg {
+            fill: var(--kwetu-white);
+        }
+
+        @media (max-width: 600px) {
+            .kwetu-grid-container {
+                grid-template-columns: 1fr;
+            }
+            .kwetu-header-box h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="kwetu-nav">
+        <a href="https://kwetucare.org/#home" class="btn-back-home">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Home
+        </a>
+    </nav>
+
+    <div class="kwetu-content">
+        <div class="kwetu-header-box">
+            <p>Our Media Assets</p>
+            <h2>Kwetu <span>Gallery</span> Portal</h2>
+        </div>
+
+        <div class="kwetu-grid-container" id="galleryGrid">
+            </div>
+    </div>
+
+    <script>
+        const photoLinks = [
+            "https://i.ibb.co/3yjpj6xS/0Z5A2808.jpg", "https://i.ibb.co/Ng2cRSzt/0Z5A2813.jpg",
+            "https://i.ibb.co/hxCJHz4P/0Z5A2678.jpg", "https://i.ibb.co/cc5vf17b/0Z5A2682.jpg",
+            "https://i.ibb.co/Wvtjkn8G/0Z5A2706.jpg", "https://i.ibb.co/LDjcLD61/0Z5A2712.jpg",
+            "https://i.ibb.co/HTyqKGKb/0Z5A2713.jpg", "https://i.ibb.co/r2HXjyhB/0Z5A2718.jpg",
+            "https://i.ibb.co/d0mZ28LM/0Z5A2735.jpg", "https://i.ibb.co/vCNkfqvb/0Z5A3277.jpg",
+            "https://i.ibb.co/wZL3dj9V/0Z5A3298.jpg", "https://i.ibb.co/KcqDWBgY/0Z5A3300.jpg",
+            "https://i.ibb.co/9mqtxnwb/0Z5A3305.jpg", "https://i.ibb.co/jkGtX5Xx/0Z5A3320.jpg",
+            "https://i.ibb.co/4wvVyKyR/0Z5A3329.jpg", "https://i.ibb.co/tpbYwpNk/0Z5A3332.jpg",
+            "https://i.ibb.co/3YBgsHv3/0Z5A3147.jpg", "https://i.ibb.co/jvLHm6Bh/0Z5A3170.jpg",
+            "https://i.ibb.co/QFtk9kCL/0Z5A3181.jpg", "https://i.ibb.co/v44MwjSh/0Z5A3185.jpg",
+            "https://i.ibb.co/MDdFj9LT/0Z5A3187.jpg", "https://i.ibb.co/spwb8vMW/0Z5A3204.jpg",
+            "https://i.ibb.co/1YNhCZCx/0Z5A3206.jpg", "https://i.ibb.co/PGhrLsvV/0Z5A3213.jpg",
+            "https://i.ibb.co/1Ydbb4H8/0Z5A3230.jpg", "https://i.ibb.co/k6mhCYj3/0Z5A3242.jpg",
+            "https://i.ibb.co/Kzr75kVY/0Z5A3244.jpg", "https://i.ibb.co/TDxVCr2c/0Z5A3247.jpg",
+            "https://i.ibb.co/XPZjzK0/0Z5A3269.jpg", "https://i.ibb.co/mrfY2J8y/0Z5A3098.jpg",
+            "https://i.ibb.co/pvMsCk8K/0Z5A3108.jpg", "https://i.ibb.co/35b1jcLN/0Z5A3117.jpg",
+            "https://i.ibb.co/SDqPS1FG/0Z5A3128.jpg", "https://i.ibb.co/vxFRJrRs/0Z5A3085.jpg",
+            "https://i.ibb.co/99JqSCYT/0Z5A3090.jpg", "https://i.ibb.co/nMcKLWG7/0Z5A3092.jpg",
+            "https://i.ibb.co/8Ltf9VnG/0Z5A3014.jpg", "https://i.ibb.co/0VtXZ08G/0Z5A3030.jpg",
+            "https://i.ibb.co/Qvb5PzxG/0Z5A3053.jpg", "https://i.ibb.co/RkJ19w5W/0Z5A3059.jpg",
+            "https://i.ibb.co/tTfYkNJJ/0Z5A3060.jpg", "https://i.ibb.co/7JdnmFxR/0Z5A3068.jpg",
+            "https://i.ibb.co/5Xxqqsqr/0Z5A2994.jpg", "https://i.ibb.co/vCSFQV8s/0Z5A2997.jpg",
+            "https://i.ibb.co/FLJBX058/0Z5A3008.jpg", "https://i.ibb.co/LDsGprmt/0Z5A2939.jpg",
+            "https://i.ibb.co/fKV74bd/0Z5A2943.jpg", "https://i.ibb.co/Jjj5qcNN/0Z5A2947.jpg",
+            "https://i.ibb.co/CpRtHDzF/0Z5A2975.jpg", "https://i.ibb.co/ycsZk08C/0Z5A2903.jpg",
+            "https://i.ibb.co/gbSFTRbr/0Z5A2912.jpg", "https://i.ibb.co/Z1bfzDTy/0Z5A2927.jpg",
+            "https://i.ibb.co/ccC4HKcJ/0Z5A2929.jpg", "https://i.ibb.co/TCCmYvc/0Z5A2936.jpg",
+            "https://i.ibb.co/rGfRyF5j/0Z5A2865.jpg", "https://i.ibb.co/sp5TCYpp/0Z5A2875.jpg",
+            "https://i.ibb.co/pH42Mwd/0Z5A2899.jpg", "https://i.ibb.co/zhzdJjtq/0Z5A2829.jpg",
+            "https://i.ibb.co/KpFjG4Z6/0Z5A2844.jpg", "https://i.ibb.co/GfV8DLpb/0Z5A2858.jpg"
+        ];
+
+        const grid = document.getElementById('galleryGrid');
+
+        photoLinks.forEach((url, index) => {
+            grid.innerHTML += `
+                <div class="kwetu-item">
+                    <img src="${url}" alt="Kwetu Media Asset" loading="lazy">
+                    <div class="kwetu-dl-layer">
+                        <a href="${url}" download="Kwetu_Photo_${index + 1}.jpg" class="kwetu-dl-btn" title="Download Instant">
+                            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
