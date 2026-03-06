@@ -1020,10 +1020,11 @@ p {
         display: flex; opacity: 1; transform: translateY(0); pointer-events: auto;
     }
 
-    /* --- WHATSAPP FLOATING BUTTON --- */
+    /* --- WHATSAPP CONTAINER --- */
     #wa-container {
         position: fixed; bottom: 30px; right: 30px; z-index: 9999998;
         display: flex; flex-direction: column; align-items: flex-end;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     #wa-floating-btn {
@@ -1038,21 +1039,60 @@ p {
 
     /* --- CHAT BOX WINDOW --- */
     #wa-chat-box {
-        width: 300px; background: #e5ddd5; border-radius: 15px;
-        margin-bottom: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        width: 320px; background: #e5ddd5; border-radius: 10px;
+        margin-bottom: 15px; box-shadow: 0 15px 50px rgba(0,0,0,0.2);
         display: none; flex-direction: column; overflow: hidden;
-        font-family: Arial, sans-serif; border: 1px solid #ddd;
     }
 
-    .wa-header { background: #075e54; color: white; padding: 15px; display: flex; align-items: center; gap: 10px; }
-    .wa-header img { width: 30px; height: 30px; border-radius: 50%; }
-
-    .wa-body { padding: 20px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
-    .wa-msg { background: white; padding: 10px; border-radius: 0 10px 10px 10px; font-size: 13px; position: relative; max-width: 90%; }
+    .wa-header { 
+        background: #4f9e7d; color: white; padding: 12px 15px; 
+        display: flex; align-items: center; justify-content: space-between; 
+    }
     
-    .wa-footer { background: white; padding: 10px; display: flex; align-items: center; gap: 5px; }
-    .wa-input { flex: 1; border: 1px solid #eee; padding: 8px 12px; border-radius: 20px; outline: none; font-size: 13px; }
-    .wa-send { background: #25D366; border: none; width: 35px; height: 35px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .wa-header-left { display: flex; align-items: center; gap: 10px; }
+    .wa-header img { width: 30px; height: 30px; filter: brightness(0) invert(1); }
+    
+    .wa-close-btn { 
+        background: none; border: none; color: white; font-size: 20px; 
+        cursor: pointer; opacity: 0.8; transition: 0.2s;
+    }
+    .wa-close-btn:hover { opacity: 1; }
+
+    .wa-body { 
+        padding: 20px; min-height: 150px;
+        background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); 
+        background-size: contain; 
+    }
+    
+    .wa-msg { 
+        background: #3b71ca; color: white; padding: 10px 15px; 
+        border-radius: 4px; font-size: 15px; position: relative; 
+        max-width: 85%; line-height: 1.4;
+    }
+    
+    .wa-time { 
+        display: block; font-size: 11px; margin-top: 5px; 
+        color: rgba(255,255,255,0.8); text-align: left;
+    }
+
+    .wa-footer { background: white; padding: 12px; display: flex; align-items: center; gap: 8px; }
+    
+    .wa-input-wrapper {
+        flex: 1; background: #f0f2f5; border-radius: 25px; 
+        padding: 8px 15px; display: flex; align-items: center;
+    }
+    
+    .wa-input { 
+        width: 100%; border: none; background: transparent; 
+        outline: none; font-size: 14px; color: #333;
+    }
+    
+    .wa-send-btn { 
+        background: #25D366; border: none; width: 42px; height: 42px; 
+        border-radius: 50%; color: white; cursor: pointer; 
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 </style>
 
 <div id="timed-gift-prompt">
@@ -1075,20 +1115,24 @@ p {
 <div id="wa-container">
     <div id="wa-chat-box">
         <div class="wa-header">
-            <img src="https://i.pinimg.com/736x/93/b2/65/93b265c795140247db600ac92e58746a.jpg" alt="Admin">
-            <div>
-                <div style="font-weight: bold; font-size: 14px;">Kwetu Care</div>
-                <div style="font-size: 11px; opacity: 0.8;">Typically replies in 1h</div>
+            <div class="wa-header-left">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+                <span style="font-weight: 500;">WhatsApp Support</span>
             </div>
+            <button class="wa-close-btn" onclick="toggleChat()">×</button>
         </div>
         <div class="wa-body">
             <div class="wa-msg">
-                Hello, Welcome to Kwetu Home Of Peace :)
+                Hello, Welcome to Kwetu Care :)
+                <span id="wa-live-time" class="wa-time">16:38</span>
             </div>
         </div>
         <div class="wa-footer">
-            <input type="text" id="wa-user-input" class="wa-input" placeholder="Type a message...">
-            <button onclick="sendToWhatsApp()" class="wa-send">
+            <div class="wa-input-wrapper">
+                <span style="margin-right: 8px; font-size: 18px; color: #919191;">😊</span>
+                <input type="text" id="wa-user-input" class="wa-input" placeholder="Type a message...">
+            </div>
+            <button onclick="sendToWhatsApp()" class="wa-send-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
         </div>
@@ -1100,30 +1144,37 @@ p {
 </div>
 
 <script>
-const prompt = document.getElementById('timed-gift-prompt');
-const waBtn = document.getElementById('wa-floating-btn');
-const chatBox = document.getElementById('wa-chat-box');
-const phone = "254710850380"; // Your WhatsApp Number
+const phone = "254710850380";
+
+// Set Live Time instantly on load
+function updateTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('wa-live-time').innerText = `${hours}:${minutes}`;
+}
 
 function toggleChat() {
-    chatBox.style.display = (chatBox.style.display === 'flex') ? 'none' : 'flex';
+    const chatBox = document.getElementById('wa-chat-box');
+    const isVisible = chatBox.style.display === 'flex';
+    chatBox.style.display = isVisible ? 'none' : 'flex';
+    if (!isVisible) updateTime(); // Update time every time it opens
 }
 
 function sendToWhatsApp() {
     const message = document.getElementById('wa-user-input').value;
     if (message.trim() === "") return;
-    
-    const encodedMsg = encodeURIComponent(message);
-    const url = `https://wa.me/${phone}?text=${encodedMsg}`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
 }
 
 function closeGiftPrompt() {
-    prompt.style.display = 'none';
+    document.getElementById('timed-gift-prompt').style.display = 'none';
     showWhatsApp();
 }
 
 function showWhatsApp() {
+    const waBtn = document.getElementById('wa-floating-btn');
     waBtn.style.opacity = '1';
     waBtn.style.transform = 'scale(1)';
     waBtn.style.pointerEvents = 'auto';
@@ -1131,12 +1182,12 @@ function showWhatsApp() {
 
 window.onscroll = function() {
     if (window.pageYOffset > 80) {
-        prompt.style.opacity = '0';
-        prompt.style.pointerEvents = 'none';
+        document.getElementById('timed-gift-prompt').style.opacity = '0';
         showWhatsApp();
     }
 };
 
+updateTime(); // Run once immediately
 document.getElementById('gift-close-btn').onclick = closeGiftPrompt;
 </script>
 
@@ -3599,6 +3650,7 @@ function toggleDonate() {
     
 </body>
 </html>
+
 
 
 
