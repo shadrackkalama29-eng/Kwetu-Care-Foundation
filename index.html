@@ -1013,16 +1013,16 @@ p {
 
     /* --- GIFT PROMPT --- */
     #timed-gift-prompt {
-        position: fixed; bottom: 20px; right: 20px; z-index: 9999999; 
+        position: fixed; bottom: 30px; right: 20px; z-index: 9999999; 
         background: white; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); 
         max-width: 320px; border: 1px solid rgba(0,0,0,0.05); 
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex; opacity: 1; transform: translateY(0); pointer-events: auto;
     }
 
-    /* --- WHATSAPP CONTAINER --- */
+    /* --- WHATSAPP CONTAINER (Moved 10px Up) --- */
     #wa-container {
-        position: fixed; bottom: 30px; right: 30px; z-index: 9999998;
+        position: fixed; bottom: 40px; right: 30px; z-index: 9999998;
         display: flex; flex-direction: column; align-items: flex-end;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
@@ -1121,7 +1121,7 @@ p {
         </div>
         <div class="wa-body">
             <div class="wa-msg">
-                Hello, Welcome to Kwetu Home Of Peace :)
+                Hello welcome to Kwetu Care Foundation
                 <span id="wa-live-time" class="wa-time">00:00</span>
             </div>
         </div>
@@ -1183,11 +1183,9 @@ window.onscroll = function() {
     }
 };
 
-// Initial run
 updateLiveTime();
 document.getElementById('gift-close-btn').onclick = closeGiftPrompt;
 </script>
-
   <section id="about" class="py-20 bg-white relative">
     <div class="absolute top-0 right-0 w-1/3 h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-50 z-0"></div>
 
@@ -3647,6 +3645,7 @@ function toggleDonate() {
     
 </body>
 </html>
+
 
 
 
