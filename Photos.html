@@ -20,7 +20,7 @@
             color: var(--kwetu-black);
         }
 
-        /* Sticky Navigation Bar */
+        /* Sticky Navigation */
         .kwetu-nav {
             position: sticky;
             top: 0;
@@ -42,30 +42,17 @@
             text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
         }
 
-        .btn-back-home svg {
-            margin-right: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-back-home:hover {
-            color: var(--kwetu-red);
-        }
-
-        .btn-back-home:hover svg {
-            transform: translateX(-5px);
-        }
+        .btn-back-home:hover { color: var(--kwetu-red); }
 
         .kwetu-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 20px 80px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
-        /* Header Styling */
         .kwetu-header-box {
             margin-bottom: 50px;
             border-bottom: 3px solid var(--kwetu-teal);
@@ -73,106 +60,66 @@
             padding-bottom: 10px;
         }
 
-        .kwetu-header-box p {
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 700;
-            color: var(--kwetu-teal);
-            margin-bottom: 5px;
-        }
-
         .kwetu-header-box h2 {
             font-size: 2.8rem;
             margin: 0;
-            color: var(--kwetu-black);
             text-transform: uppercase;
         }
 
-        .kwetu-header-box h2 span {
-            color: var(--kwetu-red);
-        }
+        .kwetu-header-box h2 span { color: var(--kwetu-red); }
 
-        /* Gallery Grid Layout */
+        /* Gallery Grid */
         .kwetu-grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
-            margin-top: 30px;
         }
 
         .kwetu-item {
             position: relative;
-            background: var(--kwetu-black);
+            background: #000;
             border-radius: 4px;
             overflow: hidden;
             aspect-ratio: 3/2;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #eee;
-        }
-
-        .kwetu-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border-color: var(--kwetu-teal);
         }
 
         .kwetu-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
-        /* Instant Download Layer */
+        /* Hover Overlay */
         .kwetu-dl-layer {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 156, 166, 0.85);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
 
-        .kwetu-item:hover .kwetu-dl-layer {
-            opacity: 1;
-        }
+        .kwetu-item:hover .kwetu-dl-layer { opacity: 1; }
 
         .kwetu-dl-btn {
             background: var(--kwetu-white);
             padding: 15px;
             border-radius: 50%;
+            cursor: pointer;
+            border: none;
             display: flex;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: transform 0.2s;
-            text-decoration: none;
         }
 
-        .kwetu-dl-btn:hover {
-            transform: scale(1.2);
-            background: var(--kwetu-red);
-        }
-
-        .kwetu-dl-btn svg {
-            width: 28px;
-            height: 28px;
-            fill: var(--kwetu-teal);
-        }
-
-        .kwetu-dl-btn:hover svg {
-            fill: var(--kwetu-white);
-        }
+        .kwetu-dl-btn:hover { background: var(--kwetu-red); }
+        .kwetu-dl-btn svg { width: 28px; height: 28px; fill: var(--kwetu-teal); }
+        .kwetu-dl-btn:hover svg { fill: var(--kwetu-white); }
 
         @media (max-width: 600px) {
-            .kwetu-grid-container {
-                grid-template-columns: 1fr;
-            }
-            .kwetu-header-box h2 { font-size: 1.8rem; }
+            .kwetu-grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -180,22 +127,18 @@
 
     <nav class="kwetu-nav">
         <a href="https://kwetucare.org/#home" class="btn-back-home">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Back to Home
         </a>
     </nav>
 
     <div class="kwetu-content">
         <div class="kwetu-header-box">
-            <p>Our Media Assets</p>
-            <h2>Kwetu <span>Gallery</span> Portal</h2>
+            <p>Direct Download Portal</p>
+            <h2>Kwetu <span>Gallery</span></h2>
         </div>
 
-        <div class="kwetu-grid-container" id="galleryGrid">
-            </div>
+        <div class="kwetu-grid-container" id="galleryGrid"></div>
     </div>
 
     <script>
@@ -232,16 +175,36 @@
             "https://i.ibb.co/KpFjG4Z6/0Z5A2844.jpg", "https://i.ibb.co/GfV8DLpb/0Z5A2858.jpg"
         ];
 
+        // This function forces the browser to download the file directly
+        async function downloadImage(url, filename) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                // Fallback for strict CORS: open in new tab if fetch fails
+                window.open(url, '_blank');
+            }
+        }
+
         const grid = document.getElementById('galleryGrid');
 
         photoLinks.forEach((url, index) => {
+            const fileName = `Kwetu_Asset_${index + 1}.jpg`;
             grid.innerHTML += `
                 <div class="kwetu-item">
-                    <img src="${url}" alt="Kwetu Media Asset" loading="lazy">
+                    <img src="${url}" alt="Kwetu Media" loading="lazy">
                     <div class="kwetu-dl-layer">
-                        <a href="${url}" download="Kwetu_Photo_${index + 1}.jpg" class="kwetu-dl-btn" title="Download Instant">
+                        <button class="kwetu-dl-btn" onclick="downloadImage('${url}', '${fileName}')" title="Download to Device">
                             <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
             `;
