@@ -35,6 +35,87 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
+        The code is now fully configured with your number +254 710 850380 and the custom message. I've cleaned up the structure so you can simply copy and paste these two blocks.
+
+1. The Style Block (CSS)
+Place this in your <head> section. It handles the "hover" animation for the WhatsApp button and the pulsing effect for the donation prompt.
+
+HTML
+<style>
+    /* --- SHARED & ANIMATIONS --- */
+    @keyframes pulse-red {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+
+    /* --- DONATION POPUP (Home Page Only) --- */
+    #timed-gift-prompt {
+        display: none; 
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        z-index: 2147483647; 
+        background: white; 
+        border-radius: 20px; 
+        box-shadow: 0 25px 60px rgba(0,0,0,0.4); 
+        max-width: 320px; 
+        overflow: hidden; 
+        border: 1px solid rgba(0,0,0,0.05); 
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.95);
+    }
+
+    /* --- WHATSAPP BUTTON (Secondary Pages Only) --- */
+    #wa-floating-container {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        display: none; /* Controlled by JS */
+        align-items: center;
+        flex-direction: row; 
+        text-decoration: none;
+    }
+
+    #wa-icon {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease;
+        object-fit: cover;
+        border: 2px solid white;
+    }
+
+    #wa-tooltip {
+        background: #25D366;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 30px;
+        margin-right: 15px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        white-space: nowrap;
+    }
+
+    /* Hover Interactions */
+    #wa-floating-container:hover #wa-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    #wa-floating-container:hover #wa-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
         /* PARTNERS MARQUEE ANIMATIONS */
         @keyframes scroll {
             0% { transform: translateX(0); }
@@ -874,110 +955,86 @@ p {
     </div>
 </div>
 
-<div id="timed-gift-prompt" style="
-    display: none; 
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    z-index: 2147483647; 
-    background: white; 
-    border-radius: 20px; 
-    box-shadow: 0 25px 60px rgba(0,0,0,0.4); 
-    max-width: 320px; 
-    overflow: hidden; 
-    border: 1px solid rgba(0,0,0,0.05); 
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    opacity: 0; 
-    transform: translateY(30px) scale(0.95);
-    pointer-events: auto; 
-    isolation: isolate;
-">
+<div id="timed-gift-prompt">
     <div style="padding: 15px; display: flex; align-items: center; gap: 12px; position: relative; flex: 1;">
         <div style="position: absolute; top: 8px; left: 12px; display: flex; align-items: center; gap: 5px;">
-            <div style="width: 6px; height: 6px; background: #E31837; border-radius: 50%;" class="mission-dot-pulse"></div>
+            <div style="width: 6px; height: 6px; background: #E31837; border-radius: 50%; animation: pulse-red 1.5s infinite;"></div>
             <span id="mission-text-feed" style="font-size: 8px; font-weight: 900; color: #E31837; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.5s;">Mission: 72% Goal</span>
         </div>
         <div style="background: #fff5f5; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0; font-size: 18px;">❤️</div>
-        <p style="margin: 0; font-size: 11px; line-height: 1.4; font-weight: 800; color: #1f2937; letter-spacing: -0.01em;">
+        <p style="margin: 0; font-size: 11px; line-height: 1.4; font-weight: 800; color: #1f2937;">
             Your gift of <span style="color: #E31837;">1,200 KES</span> changes a life in Laikipia.
         </p>
     </div>
-
     <div style="display: flex; flex-direction: column; border-left: 1px solid #f3f4f6; width: 80px; flex-shrink: 0;">
-        <button id="gift-give-btn" style="flex: 1; border: none; background: #111827; color: white; font-size: 10px; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.1em; padding: 0;">GIVE</button>
-        <button id="gift-close-btn" style="flex: 1; border: none; border-top: 1px solid #e5e7eb; background: #ffffff; color: #9CA3AF; font-size: 9px; font-weight: 700; cursor: pointer; text-transform: uppercase; padding: 0;">CLOSE</button>
+        <button id="gift-give-btn" style="flex: 1; border: none; background: #111827; color: white; font-size: 10px; font-weight: 900; cursor: pointer;">GIVE</button>
+        <button id="gift-close-btn" style="flex: 1; border: none; border-top: 1px solid #e5e7eb; background: #ffffff; color: #9CA3AF; font-size: 9px; font-weight: 700; cursor: pointer;">CLOSE</button>
     </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname;
+    // Identifies homepage (root, index.html, or empty)
+    const isHomePage = path === '/' || path.endsWith('index.html') || path === '';
 
-    // 1. Define the Elements
-    const prompt = document.getElementById('timed-gift-prompt');
-    const closeBtn = document.getElementById('gift-close-btn');
-    const giveBtn = document.getElementById('gift-give-btn');
+    if (isHomePage) {
+        /* --- HOME PAGE LOGIC --- */
+        const prompt = document.getElementById('timed-gift-prompt');
+        const closeBtn = document.getElementById('gift-close-btn');
+        const giveBtn = document.getElementById('gift-give-btn');
 
-    // 2. The Logic to Close the Popup
-    function closePrompt() {
-        if(prompt) {
+        const closePrompt = () => {
             prompt.style.opacity = '0';
             prompt.style.transform = 'translateY(20px) scale(0.95)';
-            setTimeout(() => { 
-                prompt.style.display = 'none'; 
-            }, 600);
-        }
-    }
+            setTimeout(() => { prompt.style.display = 'none'; }, 600);
+        };
 
-    // 3. ATTACH THE CLICK LISTENERS DIRECTLY (This fixes the issue)
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.preventDefault();    // Prevent any default browser action
-            e.stopPropagation();   // Stop the click from bubbling up
-            console.log("Close clicked"); 
-            closePrompt();
-        });
-    }
+        if (closeBtn) closeBtn.onclick = closePrompt;
+        if (giveBtn) giveBtn.onclick = () => { window.location.href = "#donate"; closePrompt(); };
 
-    if (giveBtn) {
-        giveBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Call your global donate function if it exists
-            if (typeof window.toggleDonate === 'function') {
-                window.toggleDonate();
-            } else {
-                console.log("Donate function missing, redirecting...");
-                window.location.href = "#donate"; // Fallback
-            }
-            closePrompt();
-        });
-    }
-
-    // 4. Show the prompt after 4 seconds
-    setTimeout(() => {
-        if(prompt) {
+        setTimeout(() => {
             prompt.style.display = 'flex';
             setTimeout(() => {
                 prompt.style.opacity = '1';
                 prompt.style.transform = 'translateY(0) scale(1)';
             }, 50);
-        }
-    }, 4000);
+        }, 4000);
 
-    // 5. Mission Text Animation
-    const milestones = ["Mission: 72% Monthly Goal", "Status: Supplies Needed", "Community: 500+ Families", "Impact: Active in Laikipia"];
-    let mIdx = 0;
-    setInterval(() => {
-        const mText = document.getElementById('mission-text-feed');
-        if(mText) {
-            mText.style.opacity = 0;
-            setTimeout(() => {
-                mIdx = (mIdx + 1) % milestones.length;
-                mText.innerText = milestones[mIdx];
-                mText.style.opacity = 1;
-            }, 500);
-        }
-    }, 4000);
+        // Mission Text Rotation
+        const milestones = ["Mission: 72% Goal", "Status: Supplies Needed", "Impact: Laikipia"];
+        let mIdx = 0;
+        setInterval(() => {
+            const mText = document.getElementById('mission-text-feed');
+            if(mText) {
+                mText.style.opacity = 0;
+                setTimeout(() => {
+                    mIdx = (mIdx + 1) % milestones.length;
+                    mText.innerText = milestones[mIdx];
+                    mText.style.opacity = 1;
+                }, 500);
+            }
+        }, 4000);
 
+    } else {
+        /* --- ALL OTHER PAGES LOGIC --- */
+        const phoneNumber = "254710850380";
+        const customMsg = encodeURIComponent("Hello! I would like to learn more about your work in Laikipia.");
+        const iconUrl = "https://i.pinimg.com/736x/93/b2/65/93b265c795140247db600ac92e58746a.jpg";
+
+        const waLink = document.createElement('a');
+        waLink.id = 'wa-floating-container';
+        waLink.href = `https://wa.me/${phoneNumber}?text=${customMsg}`;
+        waLink.target = "_blank";
+        waLink.style.display = "flex"; // Show it
+        
+        waLink.innerHTML = `
+            <div id="wa-tooltip">Chat with us!</div>
+            <img id="wa-icon" src="${iconUrl}" alt="WhatsApp Chat">
+        `;
+        
+        document.body.appendChild(waLink);
+    }
 });
 </script>
 
@@ -3431,6 +3488,7 @@ function toggleDonate() {
     
 </body>
 </html>
+
 
 
 
