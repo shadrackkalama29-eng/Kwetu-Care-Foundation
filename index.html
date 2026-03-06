@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Kwetu Care Foundation | Healthcare with Heart</title>
-    <meta name="description" content="Kwetu Care Foundation provides compassionate healthcare and community support. Dedicated to bringing quality medical care to underserved communities.">
-    <link rel="canonical" href="https://www.kwetucare.org/" />
 
-    <meta property="og:title" content="Kwetu Care Foundation | Healthcare with Heart">
-    <meta property="og:description" content="Providing compassionate healthcare and community support for those in need.">
-    <meta property="og:image" content="https://i.pinimg.com/736x/bc/46/47/bc46477e9599afe66183c695f81e23b8.jpg">
-    <meta property="og:url" content="https://www.kwetucare.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "NonProfitOrganization",
-      "name": "Kwetu Care Foundation",
-      "url": "https://www.kwetucare.org",
-      "logo": "https://i.pinimg.com/736x/bc/46/47/bc46477e9599afe66183c695f81e23b8.jpg",
-      "sameAs": [
-        "https://facebook.com/kwetucare",
-        "https://instagram.com/kwetucare"
-        "address": {
-    "@type": "10400",
+<title>Kwetu Care Foundation | Healthcare with Heart</title>
+
+<meta name="description" content="Kwetu Care Foundation provides compassionate healthcare and community support. Dedicated to bringing quality medical care to underserved communities.">
+
+<link rel="canonical" href="https://www.kwetucare.org/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Kwetu Care Foundation | Healthcare with Heart">
+<meta property="og:description" content="Providing compassionate healthcare and community support for those in need.">
+<meta property="og:image" content="https://i.pinimg.com/736x/bc/46/47/bc46477e9599afe66183c695f81e23b8.jpg">
+<meta property="og:url" content="https://www.kwetucare.org">
+<meta property="og:type" content="website">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NonProfitOrganization",
+  "name": "Kwetu Care Foundation",
+  "url": "https://www.kwetucare.org",
+  "logo": "https://i.pinimg.com/736x/bc/46/47/bc46477e9599afe66183c695f81e23b8.jpg",
+  "sameAs": [
+    "https://facebook.com/kwetucare",
+    "https://instagram.com/kwetucare"
+  ],
+  "address": {
+    "@type": "PostalAddress",
     "addressLocality": "Nanyuki",
-    "addressCountry": "Kenya"
-      ]
-    }
-    </script>
+    "postalCode": "10400",
+    "addressCountry": "KE"
+  }
+}
+</script>
+
+</head>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -42,6 +52,46 @@ Place this in your <head> section. It handles the "hover" animation for the What
 
 HTML
 <style>
+.kenflix-glow{
+position:relative;
+transition:0.3s;
+animation:kenGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes kenGlow{
+
+0%{
+text-shadow:
+0 0 2px #ED1C24,
+0 0 5px #ED1C24;
+}
+
+50%{
+text-shadow:
+0 0 6px #ED1C24,
+0 0 12px #ED1C24,
+0 0 20px #ED1C24;
+}
+
+100%{
+text-shadow:
+0 0 3px #ED1C24,
+0 0 8px #ED1C24;
+}
+
+}
+
+.kenflix-glow:hover{
+
+text-shadow:
+0 0 8px #ED1C24,
+0 0 15px #ED1C24,
+0 0 30px #ED1C24,
+0 0 50px #ED1C24;
+
+transform:scale(1.05);
+
+}
     /* --- SHARED & ANIMATIONS --- */
     @keyframes pulse-red {
         0% { opacity: 1; }
@@ -955,86 +1005,133 @@ p {
     </div>
 </div>
 
+<style>
+    /* --- ANIMATIONS --- */
+    @keyframes mission-pulse {
+        0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; }
+    }
+
+    /* --- GIFT PROMPT (Always visible on load) --- */
+    #timed-gift-prompt {
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        z-index: 9999999; 
+        background: white; 
+        border-radius: 20px; 
+        box-shadow: 0 25px 60px rgba(0,0,0,0.4); 
+        max-width: 320px; 
+        border: 1px solid rgba(0,0,0,0.05); 
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex; 
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    /* --- WHATSAPP BUTTON (Higher up) --- */
+    #wa-floating-btn {
+        position: fixed;
+        bottom: 100px; 
+        right: 30px;
+        z-index: 9999998;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.6);
+    }
+
+    #wa-icon {
+        width: 65px; height: 65px; border-radius: 50%;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        object-fit: cover; border: 2px solid white;
+    }
+
+    #wa-tooltip {
+        background: #25D366; color: white; padding: 10px 18px;
+        border-radius: 30px; margin-right: 15px; font-family: sans-serif;
+        font-size: 14px; font-weight: 700; opacity: 0;
+        visibility: hidden; transform: translateX(10px); transition: 0.3s;
+    }
+
+    #wa-floating-btn:hover #wa-tooltip { opacity: 1; visibility: visible; transform: translateX(0); }
+</style>
+
 <div id="timed-gift-prompt">
     <div style="padding: 15px; display: flex; align-items: center; gap: 12px; position: relative; flex: 1;">
         <div style="position: absolute; top: 8px; left: 12px; display: flex; align-items: center; gap: 5px;">
-            <div style="width: 6px; height: 6px; background: #E31837; border-radius: 50%; animation: pulse-red 1.5s infinite;"></div>
-            <span id="mission-text-feed" style="font-size: 8px; font-weight: 900; color: #E31837; text-transform: uppercase; letter-spacing: 0.05em; transition: opacity 0.5s;">Mission: 72% Goal</span>
+            <div style="width: 6px; height: 6px; background: #E31837; border-radius: 50%; animation: mission-pulse 1.5s infinite;"></div>
+            <span id="mission-text-feed" style="font-size: 8px; font-weight: 900; color: #E31837; text-transform: uppercase;">Mission: Active in Laikipia</span>
         </div>
         <div style="background: #fff5f5; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 12px; flex-shrink: 0; font-size: 18px;">❤️</div>
         <p style="margin: 0; font-size: 11px; line-height: 1.4; font-weight: 800; color: #1f2937;">
-            Your gift of <span style="color: #E31837;">1,200 KES</span> changes a life in Laikipia.
+            Your gift of <span style="color: #E31837;">1,200 KES</span> changes a life.
         </p>
     </div>
-    <div style="display: flex; flex-direction: column; border-left: 1px solid #f3f4f6; width: 80px; flex-shrink: 0;">
-        <button id="gift-give-btn" style="flex: 1; border: none; background: #111827; color: white; font-size: 10px; font-weight: 900; cursor: pointer;">GIVE</button>
-        <button id="gift-close-btn" style="flex: 1; border: none; border-top: 1px solid #e5e7eb; background: #ffffff; color: #9CA3AF; font-size: 9px; font-weight: 700; cursor: pointer;">CLOSE</button>
+    <div style="display: flex; flex-direction: column; border-left: 1px solid #f3f4f6; width: 80px;">
+        <button onclick="toggleDonate(); closeGiftPrompt();" id="gift-give-btn" style="flex: 1; border: none; background: #111827; color: white; font-size: 10px; font-weight: 900; cursor: pointer; padding: 15px 0;">GIVE</button>
+        <button id="gift-close-btn" style="flex: 1; border: none; border-top: 1px solid #e5e7eb; background: #ffffff; color: #9CA3AF; font-size: 9px; font-weight: 700; cursor: pointer; padding: 10px 0;">CLOSE</button>
     </div>
 </div>
 
+<a id="wa-floating-btn" href="https://wa.me/254710850380?text=Hello! I would like to learn more about your work in Laikipia." target="_blank">
+    <div id="wa-tooltip">Chat with us!</div>
+    <img id="wa-icon" src="https://i.pinimg.com/736x/93/b2/65/93b265c795140247db600ac92e58746a.jpg">
+</a>
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname;
-    // Identifies homepage (root, index.html, or empty)
-    const isHomePage = path === '/' || path.endsWith('index.html') || path === '';
-
-    if (isHomePage) {
-        /* --- HOME PAGE LOGIC --- */
-        const prompt = document.getElementById('timed-gift-prompt');
-        const closeBtn = document.getElementById('gift-close-btn');
-        const giveBtn = document.getElementById('gift-give-btn');
-
-        const closePrompt = () => {
-            prompt.style.opacity = '0';
-            prompt.style.transform = 'translateY(20px) scale(0.95)';
-            setTimeout(() => { prompt.style.display = 'none'; }, 600);
-        };
-
-        if (closeBtn) closeBtn.onclick = closePrompt;
-        if (giveBtn) giveBtn.onclick = () => { window.location.href = "#donate"; closePrompt(); };
-
-        setTimeout(() => {
-            prompt.style.display = 'flex';
-            setTimeout(() => {
-                prompt.style.opacity = '1';
-                prompt.style.transform = 'translateY(0) scale(1)';
-            }, 50);
-        }, 4000);
-
-        // Mission Text Rotation
-        const milestones = ["Mission: 72% Goal", "Status: Supplies Needed", "Impact: Laikipia"];
-        let mIdx = 0;
-        setInterval(() => {
-            const mText = document.getElementById('mission-text-feed');
-            if(mText) {
-                mText.style.opacity = 0;
-                setTimeout(() => {
-                    mIdx = (mIdx + 1) % milestones.length;
-                    mText.innerText = milestones[mIdx];
-                    mText.style.opacity = 1;
-                }, 500);
-            }
-        }, 4000);
-
-    } else {
-        /* --- ALL OTHER PAGES LOGIC --- */
-        const phoneNumber = "254710850380";
-        const customMsg = encodeURIComponent("Hello! I would like to learn more about your work in Laikipia.");
-        const iconUrl = "https://i.pinimg.com/736x/93/b2/65/93b265c795140247db600ac92e58746a.jpg";
-
-        const waLink = document.createElement('a');
-        waLink.id = 'wa-floating-container';
-        waLink.href = `https://wa.me/${phoneNumber}?text=${customMsg}`;
-        waLink.target = "_blank";
-        waLink.style.display = "flex"; // Show it
-        
-        waLink.innerHTML = `
-            <div id="wa-tooltip">Chat with us!</div>
-            <img id="wa-icon" src="${iconUrl}" alt="WhatsApp Chat">
-        `;
-        
-        document.body.appendChild(waLink);
+// Function to handle closing the prompt manually
+function closeGiftPrompt() {
+    const prompt = document.getElementById('timed-gift-prompt');
+    const waBtn = document.getElementById('wa-floating-btn');
+    if(prompt) {
+        prompt.style.display = 'none';
+        // Once closed, show WhatsApp immediately
+        waBtn.style.opacity = '1';
+        waBtn.style.transform = 'scale(1)';
+        waBtn.style.pointerEvents = 'auto';
     }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const prompt = document.getElementById('timed-gift-prompt');
+    const waBtn = document.getElementById('wa-floating-btn');
+
+    // SCROLL LOGIC: Switch from Gift Prompt to WhatsApp
+    window.onscroll = function() {
+        if (window.pageYOffset > 80) {
+            // Hide Gift
+            prompt.style.opacity = '0';
+            prompt.style.transform = 'translateY(20px)';
+            prompt.style.pointerEvents = 'none';
+
+            // Show WhatsApp
+            waBtn.style.opacity = '1';
+            waBtn.style.transform = 'scale(1)';
+            waBtn.style.pointerEvents = 'auto';
+        } else {
+            // Back at the top: Show Gift (if not manually closed)
+            if (prompt.style.display !== 'none') {
+                prompt.style.opacity = '1';
+                prompt.style.transform = 'translateY(0)';
+                prompt.style.pointerEvents = 'auto';
+
+                // Hide WhatsApp
+                waBtn.style.opacity = '0';
+                waBtn.style.transform = 'scale(0.6)';
+                waBtn.style.pointerEvents = 'none';
+            }
+        }
+    };
+
+    // Close Button manually
+    document.getElementById('gift-close-btn').onclick = (e) => {
+        e.preventDefault();
+        closeGiftPrompt();
+    };
 });
 </script>
 
@@ -3265,13 +3362,22 @@ function closeCause() {
                     © 2026 KWETU CARE FOUNDATION. ALL RIGHTS RESERVED.
                 </p>
                 
-                <div class="group cursor-default flex items-center gap-2">
-                    <span class="text-white/30 text-[9px] tracking-[0.4em] uppercase font-bold">Designed by</span>
-                    <a href="https://kenflixdesigns.co.ke" target="_blank" class="relative text-white/70 hover:text-white transition-colors font-black text-[11px] tracking-tighter">
-                        KENFLIX<span class="text-[#ED1C24]">DESIGNS</span>
-                        <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#ED1C24] group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                </div>
+               <div class="group cursor-default flex items-center gap-2 glow-container">
+
+<span class="text-white/30 text-[9px] tracking-[0.4em] uppercase font-bold">
+Designed by
+</span>
+
+<a href="https://kenflixdesigns.co.ke" target="_blank"
+class="kenflix-glow relative text-white/70 hover:text-white transition-colors font-black text-[11px] tracking-tighter">
+
+KENFLIX<span class="text-[#ED1C24]">DESIGNS</span>
+
+<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#ED1C24] group-hover:w-full transition-all duration-300"></span>
+
+</a>
+
+</div>
             </div>
         </div>
     </footer>
@@ -3488,7 +3594,6 @@ function toggleDonate() {
     
 </body>
 </html>
-
 
 
 
